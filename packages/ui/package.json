@@ -1,0 +1,14 @@
+{
+  "name": "@thisany/ui",
+  "version": "1.0.0",
+  "main": "index.ts",
+  "types": "index.d.ts",
+  "peerDependencies": {
+    "react": "catalog:"
+  },
+  "devDependencies": {
+    "@types/react": "catalog:",
+    "react": "catalog:",
+    "typescript": "catalog:"
+  }
+}
