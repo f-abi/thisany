@@ -6,7 +6,12 @@
     "dev": "next dev",
     "build": "next build",
     "start": "next start",
-    "lint": "eslint"
+    "lint": "biome format --write && eslint --fix"
+  },
+  "lint-staged": {
+    "*.{vue,js,mjs,ts,mts,jsx,tsx}": [
+      "pnpm lint"
+    ]
   },
   "dependencies": {
     "class-variance-authority": "catalog:",

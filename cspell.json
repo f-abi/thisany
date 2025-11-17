@@ -7,7 +7,8 @@
     "biomejs",
     "clsx",
     "dedupe",
-    "lucide"
+    "lucide",
+    "Prefixs"
   ],
   "ignorePaths": [
     "**/node_modules/**",

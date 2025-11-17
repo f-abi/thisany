@@ -7,7 +7,12 @@ catalog:
   '@types/react': ^19
   '@types/react-dom': ^19
   '@tailwindcss/postcss': ^4
-  "@biomejs/biome": ^2
+  '@biomejs/biome': ^2
+  '@commitlint/cli': latest
+  '@commitlint/config-conventional': latest
+  'husky': latest
+  'lint-staged': latest
+  czg: latest
   turbo: latest
   react: ^19
   react-dom: ^19

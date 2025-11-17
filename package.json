@@ -1,21 +1,23 @@
 {
   "name": "thisany",
   "version": "1.0.0",
-  "description": "",
-  "main": "index.js",
   "scripts": {
     "dev": "turbo run dev",
     "dev:media": "turbo run dev --filter=media",
     "build": "turbo run build",
     "lint": "turbo run lint",
-    "fmt": "biome format"
+    "fmt": "biome format --write",
+    "prepare": "husky",
+    "cz": "czg"
   },
-  "keywords": [],
-  "author": "",
-  "license": "ISC",
   "packageManager": "pnpm@10.6.0",
   "devDependencies": {
+    "@biomejs/biome": "catalog:",
     "turbo": "catalog:",
-    "@biomejs/biome": "catalog:"
+    "@commitlint/cli": "catalog:",
+    "@commitlint/config-conventional": "catalog:",
+    "husky": "catalog:",
+    "lint-staged": "catalog:",
+    "czg": "catalog:"
   }
 }

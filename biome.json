@@ -16,7 +16,8 @@
       "!**/.next",
       "!**/.turbo",
       "!**/dist",
-      "!**/node_modules"
+      "!**/node_modules",
+      "!cspell.json"
     ]
   },
   "formatter": {
