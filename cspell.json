@@ -3,7 +3,12 @@
   "version": "0.2",
   "language": "en,en-US",
   "allowCompoundWords": true,
-  "words": ["biomejs", "dedupe"],
+  "words": [
+    "biomejs",
+    "clsx",
+    "dedupe",
+    "lucide"
+  ],
   "ignorePaths": [
     "**/node_modules/**",
     "**/dist/**",
