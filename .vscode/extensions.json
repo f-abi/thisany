@@ -1,7 +1,7 @@
 {
   "recommendations": [
     // --- 统一格式化 ---
-    "biomejs.biome",
+    "esbenp.prettier-vscode",
     // --- ESlint ---
     "dbaeumer.vscode-eslint",
     // --- EditorConfig ---

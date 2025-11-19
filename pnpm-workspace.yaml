@@ -1,15 +1,17 @@
 packages:
-  - "apps/*"
-  - "packages/*"
+  - 'apps/*'
+  - 'packages/*'
 
 catalog:
   '@types/node': ^20
   '@types/react': ^19
   '@types/react-dom': ^19
   '@tailwindcss/postcss': ^4
-  '@biomejs/biome': ^2
+  '@radix-ui/react-slot': latest
   '@commitlint/cli': latest
   '@commitlint/config-conventional': latest
+  prettier: latest
+  prettier-plugin-tailwindcss: latest
   'husky': latest
   'lint-staged': latest
   czg: latest
@@ -26,3 +28,4 @@ catalog:
   class-variance-authority: ^0
   eslint: ^9
   eslint-config-next: ^16
+  eslint-config-prettier: ^10

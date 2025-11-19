@@ -1,5 +1,9 @@
-import Image from "next/image";
-
 export default function Home() {
-  return <div>123</div>;
+  return (
+    <div className="flex flex-col">
+      {Array.from({ length: 300 }).map((_, _k) => (
+        <div key={_k}>123456</div>
+      ))}
+    </div>
+  )
 }
