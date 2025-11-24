@@ -1,9 +1,10 @@
-export default function Home() {
+import { getHomeData } from 'gying'
+
+export default async function Home() {
+  const data = await getHomeData()
   return (
     <div className="flex flex-col">
-      {Array.from({ length: 300 }).map((_, _k) => (
-        <div key={_k}>123456</div>
-      ))}
+      <div>{JSON.stringify(data)}</div>
     </div>
   )
 }

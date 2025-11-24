@@ -4,29 +4,41 @@ import path from 'node:path'
 import { fileURLToPath } from 'node:url'
 
 const __dirname = path.dirname(fileURLToPath(import.meta.url))
-const appsPath = path.resolve(__dirname, 'apps')
+
+const rootPaths = ['apps', 'packages'] // ← 新增支持 apps + packages
 
 /**
- * 获取 apps 目录中的所有子目录（作为 scope）
+ * 读取某个路径下的子目录
  */
-function getAppScopes() {
+function readScopesFromDir(dirPath) {
   try {
-    if (!fs.existsSync(appsPath)) return []
-
+    if (!fs.existsSync(dirPath)) return []
     return fs
-      .readdirSync(appsPath, { withFileTypes: true })
+      .readdirSync(dirPath, { withFileTypes: true })
       .filter(d => d.isDirectory())
       .map(d => d.name)
-      .sort()
   } catch {
     return []
   }
 }
 
-const scopes = getAppScopes()
+/**
+ * 获取 apps + packages 目录中的所有子目录作为 scope
+ */
+function getAllScopes() {
+  let all = []
+  for (const folder of rootPaths) {
+    const full = path.resolve(__dirname, folder)
+    const scopes = readScopesFromDir(full)
+    all = all.concat(scopes.map(name => `${folder}/${name}`)) // 区分 apps/foo 与 packages/bar
+  }
+  return all.sort()
+}
+
+const scopes = getAllScopes()
 
 /**
- * 自动从 Git 变更中推断 scope（monorepo：apps/<scope>/**）
+ * 自动从 Git 变更中推断 scope（支持 apps/<scope>/** 与 packages/<scope>/**）
  */
 function detectScope() {
   try {
@@ -36,9 +48,9 @@ function detectScope() {
       const cleaned = line.trim().replace(/^\S+\s+/, '') // 去掉 M/A/D 等
       const parts = cleaned.split(path.sep)
 
-      // 匹配 apps/<scope>/xxx
-      if (parts[0] === 'apps' && parts[1]) {
-        return parts[1]
+      // 匹配 apps/<scope>/xxx 或 packages/<scope>/xxx
+      if (rootPaths.includes(parts[0]) && parts[1]) {
+        return `${parts[0]}/${parts[1]}`
       }
     }
   } catch {

@@ -30,7 +30,6 @@ export default async function RootLayout({
     themeCookieStore && ['light', 'dark'].includes(themeCookieStore)
       ? (themeCookieStore as AppTheme)
       : 'light'
-  console.log('渲染触发')
   return (
     <html className={theme} lang="zh-CN">
       <body
