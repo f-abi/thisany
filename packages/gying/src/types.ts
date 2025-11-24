@@ -218,3 +218,112 @@ export interface Captcha {
   text: string
   type: string
 }
+
+/** 主页横幅 */
+export interface HomeBanner {
+  /** 标题 */
+  title: string
+  /** ID */
+  id: string
+  /** 类型 */
+  dir: VideoType
+  /** 地区 */
+  diqu: string
+  /** 简介 */
+  introduce: string
+  /** 图片 */
+  image: string
+  /** 封面 */
+  cover: string
+}
+
+/** 主页推荐明细 */
+export interface HomeRecommendData {
+  /** 标题 */
+  title: string
+  /** ID */
+  id: string
+  /** 类型 */
+  dir: VideoType
+  /** 标签 */
+  tag: Array<number | string>
+  /** 综合评分 */
+  pf: number
+  /** 清晰度 / 集数 */
+  xle: string
+  /** 图片 */
+  image: string
+}
+
+/** 主页推荐 */
+export interface HomeRecommend {
+  /** 推荐板块标题 */
+  title: string
+  /** 推荐数据 */
+  data: Array<HomeRecommendData>
+  /** 推荐类型 */
+  type: VideoType
+  /** 当前页 */
+  pageNo: number
+  /** 最大页 */
+  pageMax: number
+  loading: boolean
+}
+
+/**
+ * 主页数据
+ */
+export interface HomeData {
+  /** 横幅 */
+  banner: Array<HomeBanner>
+  /** 推荐 */
+  recommend: Array<HomeRecommend>
+}
+
+/**
+ * 分类列表数据
+ */
+export interface CategoryListData {
+  pageIndex: number
+  pageSize: 42
+  pageTotal: number
+  total: number
+  type: VideoType
+  items: Array<HomeRecommendData>
+}
+
+/**
+ * 影片详情
+ */
+export type VideoDetail = Video & {
+  image: string
+}
+
+/** 视频下载 */
+export interface Download {
+  /** 名称 */
+  name: string
+  /** 提取密码 */
+  password: string
+  /** 上传时间 */
+  time: string
+  /** 网盘下载地址 */
+  url: string
+  /** 上传用户 */
+  user: string
+}
+
+/** 视频下载数据 */
+export interface VideoPanList {
+  /** 网盘名称 */
+  name: string
+  /** 数据 */
+  data: Array<Download>
+}
+
+/** 视频源 */
+export interface VideoResource {
+  panList: Array<VideoPanList>
+  playList: Array<Play>
+  isCaptcha: boolean
+}

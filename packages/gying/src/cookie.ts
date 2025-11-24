@@ -83,6 +83,7 @@ export const getCookies = async (): Promise<string> => {
       // 是否需要验证
       const header = parseHeaderCheck(html)
       if (header?.n === 'thisany') {
+        // 不需要验证 缓存 6 小时
         dynamicCookies.browserVerified = 'thisany'
         dynamicCookies.expirationAt = Date.now() + 6 * 60 * 60 * 1000
         return BASE_COOKIE
