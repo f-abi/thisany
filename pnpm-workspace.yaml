@@ -16,6 +16,7 @@ catalog:
   'lint-staged': latest
   czg: latest
   turbo: latest
+  motion: latest
   react: ^19
   react-dom: ^19
   lucide-react: ^0

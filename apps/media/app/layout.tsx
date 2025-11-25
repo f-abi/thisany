@@ -1,17 +1,14 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Dosis } from 'next/font/google'
 import './globals.css'
 import type { AppTheme } from '@/types'
 import { cookies } from 'next/headers'
-import { Header } from '@/components/header'
+import { Header } from '@/components/layout/header'
+import { HoleBackground } from '@/components/animate-ui/components/backgrounds/hole'
+import { Main } from '@/components/layout/main'
 
-const geistSans = Geist({
-  variable: '--font-geist-sans',
-  subsets: ['latin']
-})
-
-const geistMono = Geist_Mono({
-  variable: '--font-geist-mono',
+const dosis = Dosis({
+  variable: '--font-dosis',
   subsets: ['latin']
 })
 
@@ -32,11 +29,10 @@ export default async function RootLayout({
       : 'light'
   return (
     <html className={theme} lang="zh-CN">
-      <body
-        className={`${geistSans.variable} ${geistMono.variable} max-w-screen overflow-x-hidden antialiased`}
-      >
+      <body className={`${dosis.variable} bg-sidebar max-w-screen overflow-x-hidden antialiased`}>
         <Header theme={theme} />
-        {children}
+        <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" />
+        <Main>{children}</Main>
       </body>
     </html>
   )

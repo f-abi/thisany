@@ -93,5 +93,7 @@
     "CHANGELOG.md": true,
     "**/pnpm-lock.yaml": true,
     "**/yarn.lock": true
-  }
+  },
+
+  "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]]
 }
