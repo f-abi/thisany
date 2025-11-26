@@ -29,9 +29,9 @@ export default async function RootLayout({
       : 'light'
   return (
     <html className={theme} lang="zh-CN">
-      <body className={`${dosis.variable} bg-sidebar max-w-screen overflow-x-hidden antialiased`}>
+      <body className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased`}>
         <Header theme={theme} />
-        <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" />
+        {/* <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" /> */}
         <Main>{children}</Main>
       </body>
     </html>

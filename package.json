@@ -10,7 +10,6 @@
     "prepare": "husky",
     "cz": "czg"
   },
-  "packageManager": "pnpm@10.6.0",
   "devDependencies": {
     "turbo": "catalog:",
     "@commitlint/cli": "catalog:",
