@@ -5,7 +5,6 @@ import type { AppTheme } from '@/types'
 import { cookies } from 'next/headers'
 import { Header } from '@/components/layout/header'
 import { HoleBackground } from '@/components/animate-ui/components/backgrounds/hole'
-import { Main } from '@/components/layout/main'
 
 const dosis = Dosis({
   variable: '--font-dosis',
@@ -32,7 +31,7 @@ export default async function RootLayout({
       <body className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased`}>
         <Header theme={theme} />
         {/* <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" /> */}
-        <Main>{children}</Main>
+        {children}
       </body>
     </html>
   )

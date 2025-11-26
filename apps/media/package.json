@@ -9,10 +9,11 @@
     "lint": "eslint --fix"
   },
   "dependencies": {
+    "gying": "workspace:*",
     "@radix-ui/react-slot": "catalog:",
+    "@radix-ui/react-tabs": "catalog:",
     "class-variance-authority": "catalog:",
     "clsx": "catalog:",
-    "gying": "workspace:*",
     "lucide-react": "catalog:",
     "motion": "catalog:",
     "next": "catalog:",
