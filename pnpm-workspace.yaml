@@ -11,6 +11,10 @@ catalog:
   '@types/node': ^20
   '@types/react': ^19
   '@types/react-dom': ^19
+  '@types/jest': latest
+  jest: latest
+  ts-jest: latest
+  ts-node: latest
   class-variance-authority: ^0
   clsx: ^2
   czg: latest

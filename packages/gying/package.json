@@ -9,8 +9,15 @@
       "import": "./index.ts"
     }
   },
+  "scripts": {
+    "test": "jest"
+  },
   "devDependencies": {
     "typescript": "catalog:",
-    "@types/node": "catalog:"
+    "@types/node": "catalog:",
+    "jest": "catalog:",
+    "@types/jest": "catalog:",
+    "ts-jest": "catalog:",
+    "ts-node": "catalog:"
   }
 }

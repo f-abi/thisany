@@ -108,14 +108,55 @@ export async function getHomeRecommendData({
  */
 export async function getCategoryListData({
   pageIndex,
-  type
+  type,
+  lang,
+  region,
+  year,
+  genre,
+  rrange,
+  srange
 }: {
   pageIndex: number
   type: VideoType
+  /**
+   * 语言
+   */
+  lang?: string
+  /**
+   * 地区
+   */
+  region?: string
+  /**
+   * 年份
+   *
+   * - 2025
+   * - 90    90年代
+   */
+  year?: string
+  /** 分类 */
+  genre?: string
+  /**
+   * 评分范围
+   * - 0_5 评分 0~5
+   */
+  rrange?: string
+  /**
+   * 评分人数
+   */
+  srange?: string
 }): Promise<CategoryListData> {
   const cookie = await getCookies()
 
-  const response = await fetch(`${GYING_API}/res/${type}?page=${pageIndex}`, {
+  const url = new URL(`${GYING_API}/res/${type}`)
+  url.searchParams.set('page', pageIndex.toString())
+  if (lang) url.searchParams.set('lang', lang)
+  if (region) url.searchParams.set('region', region)
+  if (year) url.searchParams.set('year', year)
+  if (genre) url.searchParams.set('genre', genre)
+  if (rrange) url.searchParams.set('rrange', rrange)
+  if (srange) url.searchParams.set('srange', srange)
+
+  const response = await fetch(url, {
     headers: {
       'User-Agent': USER_AGENT,
       cookie
