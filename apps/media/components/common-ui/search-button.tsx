@@ -5,7 +5,7 @@ import { Search } from 'lucide-react'
 
 export function SearchButton() {
   return (
-    <Button aria-label="搜索" size="icon-lg" variant="ghost">
+    <Button aria-label="搜索" size="icon-lg">
       <Search />
     </Button>
   )

@@ -13,16 +13,16 @@ export function ThemeButton({ theme }: Props) {
   const [currentTheme, setCurrentTheme] = useState(theme)
   const toggleTheme = () => {
     const nextTheme = currentTheme === 'dark' ? 'light' : 'dark'
-    const root = document.documentElement
-    if (root) {
-      root.classList.remove(currentTheme)
-      root.classList.add(nextTheme)
+    const html = document.documentElement
+    if (html) {
+      html.classList.remove(currentTheme)
+      html.classList.add(nextTheme)
       document.cookie = `theme=${nextTheme}; path=/; max-age=31536000`
       setCurrentTheme(nextTheme)
     }
   }
   return (
-    <Button aria-label="切换主题" onClick={toggleTheme} size="icon-lg" variant="ghost">
+    <Button aria-label="切换主题" onClick={toggleTheme} size="icon-lg">
       {currentTheme === 'dark' ? <Sun /> : <Moon />}
     </Button>
   )

@@ -49,8 +49,8 @@ export async function getHomeData(): Promise<HomeData> {
       dir: bannerRaw.y[index],
       diqu: bannerRaw.d[index],
       introduce: bannerRaw.j[index],
-      cover: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${bannerRaw.y[index]}/${bannerRaw.i[index]}_i/800.webp`,
-      image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${bannerRaw.y[index]}/${bannerRaw.i[index]}.webp`
+      cover: `${IMAGE_CDN}/img/${bannerRaw.y[index]}/${bannerRaw.i[index]}_i/800.webp`,
+      image: `${IMAGE_CDN}/img/${bannerRaw.y[index]}/${bannerRaw.i[index]}_i/800.webp`
     })),
     recommend: recommendRaw.map(_ => ({
       title: _.ht,
@@ -61,7 +61,7 @@ export async function getHomeData(): Promise<HomeData> {
         tag: _.a[index],
         pf: _.d[index],
         xle: _.g[index],
-        image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${_.ty}/${_.i[index]}${IMAGE_FORMAT}`
+        image: `${IMAGE_CDN}/img/${_.ty}/${_.i[index]}${IMAGE_FORMAT}`
       })),
       type: _.ty,
       pageNo: 1,
