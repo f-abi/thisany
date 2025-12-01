@@ -1,3 +1,4 @@
+import { GYING_TAG } from './constants'
 import { Play, PowSolveOptions, PowSolveResult } from './types'
 
 function hexToInt32Array(hex: string): Int32Array {
@@ -220,7 +221,10 @@ export function encodeFormData(
     .join('&')
 }
 
-export const calcPlayList = (data: Array<Play>): Array<Play> => {
+/**
+ * 计算播放列表
+ */
+export function calcPlayList(data: Array<Play>): Array<Play> {
   const res = data.map(item => {
     const result: string[] = []
     item.list.forEach(props => {
@@ -243,4 +247,18 @@ export const calcPlayList = (data: Array<Play>): Array<Play> => {
     }
   })
   return res
+}
+
+/**
+ * 标签转文本
+ */
+export function tagToString(tags: Array<number | string>): string {
+  return tags
+    .map((tag, i) =>
+      i === 0
+        ? tag
+        : (GYING_TAG[tag as number] ??
+          (typeof tag === 'string' ? (tag?.length > 0 ? tag : '') : ''))
+    )
+    .join(' / ')
 }

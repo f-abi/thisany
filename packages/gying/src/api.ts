@@ -6,7 +6,7 @@ import {
   HomeData,
   VideoType,
   ChangeRecommend,
-  HomeRecommendData,
+  ListItemData,
   VideoTypeList,
   CategoryListData,
   Video,
@@ -61,7 +61,7 @@ export async function getHomeData(): Promise<HomeData> {
         tag: _.a[index],
         pf: _.d[index],
         xle: _.g[index],
-        image: `${IMAGE_CDN}/img/${_.ty}/${_.i[index]}${IMAGE_FORMAT}`
+        image: `${IMAGE_CDN}/img/${_.ty}/${_.i[index]}/384.webp`
       })),
       type: _.ty,
       pageNo: 1,
@@ -80,7 +80,7 @@ export async function getHomeRecommendData({
 }: {
   pageIndex: number
   type: VideoType
-}): Promise<Array<HomeRecommendData>> {
+}): Promise<Array<ListItemData>> {
   const cookie = await getCookies()
 
   const response = await fetch(`${GYING_API}/res/change/${type}/${pageIndex}`, {

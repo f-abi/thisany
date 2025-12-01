@@ -4,11 +4,11 @@ export const APP_NAV_CONFIG = [
     name: '电影'
   },
   {
-    type: 'ac',
+    type: 'tv',
     name: '剧集'
   },
   {
-    type: 'tv',
+    type: 'ac',
     name: '动漫'
   }
 ]

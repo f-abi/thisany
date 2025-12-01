@@ -1,5 +1,7 @@
+import { Main } from '@/components/layout/main'
 import { getCategoryListData, GYING_TYPE, VideoType } from 'gying'
 import { notFound } from 'next/navigation'
+import { MediaList } from '@/components/common/media-list'
 
 export default async function CollectionPage({
   params,
@@ -23,11 +25,14 @@ export default async function CollectionPage({
   })
 
   return (
-    <div>
+    <Main>
       <div>
         Collection:{type} pageIndex:{pageIndex}
       </div>
-      <div>{JSON.stringify(data)}</div>
-    </div>
+
+      <div className="glass mb-2 flex flex-col p-4">
+        <MediaList data={data.items} />
+      </div>
+    </Main>
   )
 }

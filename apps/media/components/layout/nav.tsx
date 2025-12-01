@@ -1,6 +1,6 @@
 import { APP_NAV_CONFIG } from '@/constants'
 import Link from 'next/link'
-import { NavLinkBox } from '@/components/common-ui/nav-link-box'
+import { NavLinkBox } from '@/components/common/nav-link-box'
 
 export function Nav() {
   return (

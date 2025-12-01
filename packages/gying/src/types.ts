@@ -238,7 +238,7 @@ export interface HomeBanner {
 }
 
 /** 主页推荐明细 */
-export interface HomeRecommendData {
+export interface ListItemData {
   /** 标题 */
   title: string
   /** ID */
@@ -260,7 +260,7 @@ export interface HomeRecommend {
   /** 推荐板块标题 */
   title: string
   /** 推荐数据 */
-  data: Array<HomeRecommendData>
+  data: Array<ListItemData>
   /** 推荐类型 */
   type: VideoType
   /** 当前页 */
@@ -289,7 +289,7 @@ export interface CategoryListData {
   pageTotal: number
   total: number
   type: VideoType
-  items: Array<HomeRecommendData>
+  items: Array<ListItemData>
 }
 
 /**
