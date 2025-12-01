@@ -5,6 +5,7 @@ import type { AppTheme } from '@/types'
 import { cookies } from 'next/headers'
 import { Header } from '@/components/layout/header'
 import { HoleBackground } from '@/components/animate-ui/components/backgrounds/hole'
+import { Toaster } from '@/components/ui/sonner'
 
 const dosis = Dosis({
   variable: '--font-dosis',
@@ -25,13 +26,14 @@ export default async function RootLayout({
   const theme =
     themeCookieStore && ['light', 'dark'].includes(themeCookieStore)
       ? (themeCookieStore as AppTheme)
-      : 'light'
+      : 'dark'
   return (
     <html className={theme} lang="zh-CN">
       <body className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased`}>
         <Header theme={theme} />
         <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" />
         {children}
+        <Toaster theme={theme} />
       </body>
     </html>
   )

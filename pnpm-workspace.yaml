@@ -5,7 +5,7 @@ packages:
 catalog:
   '@commitlint/cli': latest
   '@commitlint/config-conventional': latest
-  '@radix-ui/react-slot': ^1.2.4
+  '@radix-ui/react-slot': latest
   '@radix-ui/react-tabs': latest
   '@tailwindcss/postcss': ^4
   '@types/jest': latest
@@ -17,6 +17,7 @@ catalog:
   class-variance-authority: ^0
   clsx: ^2
   czg: latest
+  sonner: latest
   eslint: ^9
   eslint-config-next: ^16
   eslint-config-prettier: ^10

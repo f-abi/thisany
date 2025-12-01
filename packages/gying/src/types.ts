@@ -267,7 +267,6 @@ export interface HomeRecommend {
   pageNo: number
   /** 最大页 */
   pageMax: number
-  loading: boolean
 }
 
 /**

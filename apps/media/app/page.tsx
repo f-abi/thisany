@@ -9,7 +9,9 @@ export default async function Home() {
   return (
     <Main>
       <HomeBanner data={data.banner} />
-      <HomeRecommend data={data.recommend} />
+      {data.recommend.map(item => (
+        <HomeRecommend key={item.type} item={item} />
+      ))}
     </Main>
   )
 }
