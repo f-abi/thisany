@@ -15,20 +15,23 @@ import {
   VideoDetail,
   Downurl,
   VideoResource,
-  Player
+  Player,
+  FetchOptions
 } from './types'
 import { calcPlayList } from './utils'
 
 /**
  * 主页数据
  */
-export async function getHomeData(): Promise<HomeData> {
+export async function getHomeData(options?: FetchOptions): Promise<HomeData> {
   const cookie = await getCookies()
 
   const response = await fetch(GYING_API, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
-      cookie
+      cookie,
+      ...options?.headers
     }
   })
 
@@ -78,17 +81,21 @@ export async function getHomeData(): Promise<HomeData> {
  */
 export async function getHomeRecommendData({
   pageIndex,
-  type
+  type,
+  options
 }: {
   pageIndex: number
   type: VideoType
+  options?: FetchOptions
 }): Promise<Array<ListItemData>> {
   const cookie = await getCookies()
 
   const response = await fetch(`${GYING_API}/res/change/${type}/${pageIndex}`, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
-      cookie
+      cookie,
+      ...options?.headers
     }
   })
 
@@ -116,7 +123,8 @@ export async function getCategoryListData({
   year,
   genre,
   rrange,
-  srange
+  srange,
+  options
 }: {
   pageIndex: number
   type: VideoType
@@ -146,6 +154,7 @@ export async function getCategoryListData({
    * 评分人数
    */
   srange?: string
+  options?: FetchOptions
 }): Promise<CategoryListData> {
   const cookie = await getCookies()
 
@@ -159,9 +168,11 @@ export async function getCategoryListData({
   if (srange) url.searchParams.set('srange', srange)
 
   const response = await fetch(url, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
-      cookie
+      cookie,
+      ...options?.headers
     }
   })
 
@@ -192,18 +203,22 @@ export async function getCategoryListData({
  */
 export async function getVideoDetail({
   id,
-  type
+  type,
+  options
 }: {
   id: string
   type: VideoType
+  options?: FetchOptions
 }): Promise<VideoDetail> {
   const cookie = await getCookies()
 
   const response = await fetch(`${GYING_API}/${type}/${id}`, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
       cookie,
-      Referer: `${GYING_API}/${type}`
+      Referer: `${GYING_API}/${type}`,
+      ...options?.headers
     }
   })
 
@@ -230,18 +245,22 @@ export async function getVideoDetail({
  */
 export async function getVideoResource({
   id,
-  type
+  type,
+  options
 }: {
   id: string
   type: VideoType
+  options?: FetchOptions
 }): Promise<VideoResource> {
   const cookie = await getCookies()
 
   const vrgResponse = await fetch(`${GYING_API}/${type}/${id}`, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
       cookie,
-      Referer: `${GYING_API}`
+      Referer: `${GYING_API}`,
+      ...options?.headers
     }
   })
 
@@ -255,10 +274,12 @@ export async function getVideoResource({
     .join(';')
 
   const response = await fetch(`${GYING_API}/res/downurl/${type}/${id}`, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
       cookie: `${cookie};${vrgCookieStrings}`,
-      Referer: `${GYING_API}/${type}/${id}`
+      Referer: `${GYING_API}/${type}/${id}`,
+      ...options?.headers
     }
   })
 
@@ -298,20 +319,24 @@ export async function getVideoPlayer({
   id,
   type,
   pid,
-  episodes
+  episodes,
+  options
 }: {
   id: string
   type: VideoType
   pid: string
   episodes: string
+  options?: FetchOptions
 }): Promise<Player> {
   const cookie = await getCookies()
 
   const response = await fetch(`${GYING_API}/py/${pid}_${episodes}.html`, {
+    ...options,
     headers: {
       'User-Agent': USER_AGENT,
       cookie,
-      Referer: `${GYING_API}/${type}/${id}`
+      Referer: `${GYING_API}/${type}/${id}`,
+      ...options?.headers
     }
   })
 

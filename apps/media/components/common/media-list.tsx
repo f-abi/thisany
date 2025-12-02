@@ -10,7 +10,7 @@ export function MediaList({ data }: { data: Array<ListItemData> }) {
         <Link
           href={`/media/${item.dir}/${item.id}`}
           key={item.id}
-          className="flex flex-col overflow-hidden rounded-(--radius) p-2 backdrop-blur-xs backdrop-saturate-0 transition-all select-none hover:bg-(--app-blur-background)"
+          className="flex flex-col overflow-hidden rounded-(--radius) p-2 backdrop-blur-xs backdrop-saturate-0 select-none hover:bg-(--app-blur-background)"
         >
           <div className="relative aspect-2/3">
             <Skeleton className="absolute top-0 z-[-1] h-full w-full" />

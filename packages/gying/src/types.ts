@@ -12,6 +12,13 @@ export interface PowSolveOptions {
   salt: string
 }
 
+export interface FetchOptions extends RequestInit {
+  next?: {
+    revalidate?: number | false
+    tags?: string[]
+  }
+}
+
 /** 影片类型 */
 export type VideoType = 'mv' | 'tv' | 'ac'
 

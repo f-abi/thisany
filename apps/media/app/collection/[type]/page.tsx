@@ -2,6 +2,7 @@ import { Main } from '@/components/layout/main'
 import { getCategoryListData, GYING_TYPE, VideoType } from 'gying'
 import { notFound } from 'next/navigation'
 import { MediaList } from '@/components/common/media-list'
+import { PaginationBar } from '@/components/common/pagination-bar'
 
 export default async function CollectionPage({
   params,
@@ -17,21 +18,27 @@ export default async function CollectionPage({
 
   if (!GYING_TYPE.includes(type)) notFound()
 
-  if (pageIndex < 1 || pageIndex > 100) throw new Error('页面错误')
+  if (pageIndex < 1) throw new Error('页面错误')
 
   const data = await getCategoryListData({
     pageIndex,
     type
   })
 
+  if (pageIndex > data.pageTotal) throw new Error('页面错误')
+
   return (
     <Main>
-      <div>
-        Collection:{type} pageIndex:{pageIndex}
-      </div>
-
       <div className="glass mb-2 flex flex-col p-4">
         <MediaList data={data.items} />
+        <div className="mt-4">
+          <PaginationBar
+            total={data.pageTotal}
+            current={pageIndex}
+            baseUrl={`/collection/${type}`}
+            searchParams={await searchParams}
+          />
+        </div>
       </div>
     </Main>
   )

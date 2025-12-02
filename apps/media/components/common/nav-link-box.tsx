@@ -20,7 +20,7 @@ export function NavLinkBox({ type, name }: (typeof APP_NAV_CONFIG)[number]) {
           'bg-destructive absolute bottom-0 h-1 rounded-full transition-all duration-300',
           isActive ? 'w-full' : 'w-0 group-hover:w-full'
         )}
-      ></div>
+      />
     </div>
   )
 }
