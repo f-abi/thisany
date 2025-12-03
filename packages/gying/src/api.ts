@@ -124,6 +124,9 @@ export async function getCategoryListData({
   genre,
   rrange,
   srange,
+  quality,
+  sort,
+  genres,
   options
 }: {
   pageIndex: number
@@ -146,6 +149,11 @@ export async function getCategoryListData({
   /** 分类 */
   genre?: string
   /**
+   * 分类多选
+   * 1
+   */
+  genres?: string
+  /**
    * 评分范围
    * - 0_5 评分 0~5
    */
@@ -154,6 +162,10 @@ export async function getCategoryListData({
    * 评分人数
    */
   srange?: string
+  /** 画质 */
+  quality?: string
+  /** 排序 */
+  sort?: string
   options?: FetchOptions
 }): Promise<CategoryListData> {
   const cookie = await getCookies()
@@ -166,6 +178,9 @@ export async function getCategoryListData({
   if (genre) url.searchParams.set('genre', genre)
   if (rrange) url.searchParams.set('rrange', rrange)
   if (srange) url.searchParams.set('srange', srange)
+  if (quality) url.searchParams.set('quality', quality)
+  if (sort) url.searchParams.set('sort', sort)
+  if (genres) url.searchParams.set('genres', genres)
 
   const response = await fetch(url, {
     ...options,
