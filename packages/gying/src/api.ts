@@ -1,5 +1,6 @@
 'use server'
 
+import { console } from 'inspector'
 import { GYING_API, IMAGE_CDN, IMAGE_FORMAT, IMAGE_SERVICE, USER_AGENT } from './constants'
 import { getCookies } from './cookie'
 import {
@@ -126,7 +127,6 @@ export async function getCategoryListData({
   srange,
   quality,
   sort,
-  genres,
   options
 }: {
   pageIndex: number
@@ -149,11 +149,6 @@ export async function getCategoryListData({
   /** 分类 */
   genre?: string
   /**
-   * 分类多选
-   * 1
-   */
-  genres?: string
-  /**
    * 评分范围
    * - 0_5 评分 0~5
    */
@@ -168,6 +163,8 @@ export async function getCategoryListData({
   sort?: string
   options?: FetchOptions
 }): Promise<CategoryListData> {
+  if (pageIndex < 1) throw new Error('影片列表错误')
+
   const cookie = await getCookies()
 
   const url = new URL(`${GYING_API}/res/${type}`)
@@ -175,12 +172,14 @@ export async function getCategoryListData({
   if (lang) url.searchParams.set('lang', lang)
   if (region) url.searchParams.set('region', region)
   if (year) url.searchParams.set('year', year)
-  if (genre) url.searchParams.set('genre', genre)
+  if (genre) {
+    url.searchParams.set('genre', genre)
+    if (genre.split('_').length > 1) url.searchParams.set('genres', '1')
+  }
   if (rrange) url.searchParams.set('rrange', rrange)
   if (srange) url.searchParams.set('srange', srange)
   if (quality) url.searchParams.set('quality', quality)
   if (sort) url.searchParams.set('sort', sort)
-  if (genres) url.searchParams.set('genres', genres)
 
   const response = await fetch(url, {
     ...options,
@@ -201,15 +200,16 @@ export async function getCategoryListData({
     pageSize: 42,
     pageTotal: preData.page.pages,
     total: 42 * preData.page.pages,
-    items: data.t.map((title, index) => ({
-      title,
-      id: data.i[index],
-      dir: type,
-      tag: data.a[index],
-      pf: data.d[index],
-      xle: data.g[index],
-      image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${type}/${data.i[index]}${IMAGE_FORMAT}`
-    }))
+    items:
+      data.t?.map((title, index) => ({
+        title,
+        id: data.i[index],
+        dir: type,
+        tag: data.a[index],
+        pf: data.d[index],
+        xle: data.g[index],
+        image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${type}/${data.i[index]}${IMAGE_FORMAT}`
+      })) ?? []
   }
 }
 
