@@ -16,15 +16,17 @@ export default function Error({
 
   return (
     <div className="flex h-screen w-screen items-center justify-center">
-      <h2>{JSON.stringify(error.message)}</h2>
-      <button
-        onClick={
-          // Attempt to recover by trying to re-render the segment
-          () => reset()
-        }
-      >
-        Try again
-      </button>
+      <div className="glass flex p-4">
+        <h2>{error.message}</h2>
+        <button
+          onClick={
+            // Attempt to recover by trying to re-render the segment
+            () => reset()
+          }
+        >
+          Try again
+        </button>
+      </div>
     </div>
   )
 }

@@ -29,21 +29,11 @@ export function HomeRecommend({ item }: { item: HomeRecommendType }) {
   }
 
   return (
-    <div className="glass mb-2 flex flex-col p-4">
-      <div className="mb-2 flex flex-row items-center justify-between">
-        <div className="text-2xl font-bold">{item.title}</div>
-        <Button
-          variant={'outline'}
-          onClick={handleRefresh}
-          disabled={isPending}
-          size="sm"
-          className="gap-2"
-        >
-          {isPending ? (
-            <LoaderCircle className="h-4 w-4 animate-spin" />
-          ) : (
-            <RefreshCw className="h-4 w-4" />
-          )}
+    <div className="glass mx-2 mb-2 flex flex-col p-2 xl:mx-0 xl:p-4">
+      <div className="mb-1 flex flex-row items-center justify-between md:mb-2">
+        <div className="text-lg font-black md:text-2xl md:font-bold">{item.title}</div>
+        <Button onClick={handleRefresh} disabled={isPending} size="sm">
+          {isPending ? <LoaderCircle className="animate-spin" /> : <RefreshCw />}
           换一换
         </Button>
       </div>

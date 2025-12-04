@@ -1,6 +1,5 @@
 'use server'
 
-import { console } from 'inspector'
 import { GYING_API, IMAGE_CDN, IMAGE_FORMAT, IMAGE_SERVICE, USER_AGENT } from './constants'
 import { getCookies } from './cookie'
 import {

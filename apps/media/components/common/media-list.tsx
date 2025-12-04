@@ -10,7 +10,7 @@ export function MediaList({ data }: { data: Array<ListItemData> }) {
         <Link
           href={`/media/${item.dir}/${item.id}`}
           key={item.id}
-          className="flex flex-col overflow-hidden rounded-(--radius) p-2 backdrop-blur-xs backdrop-saturate-0 select-none hover:bg-(--app-blur-background)"
+          className="flex flex-col overflow-hidden rounded-(--radius) p-1 backdrop-blur-xs backdrop-saturate-0 select-none hover:bg-(--app-blur-background) xl:p-2"
         >
           <div className="relative aspect-2/3">
             <Skeleton className="absolute top-0 z-[-1] h-full w-full" />
@@ -24,10 +24,10 @@ export function MediaList({ data }: { data: Array<ListItemData> }) {
             />
           </div>
           <div className="flex flex-col">
-            <span className="overflow-hidden text-center leading-loose text-ellipsis whitespace-nowrap">
+            <span className="overflow-hidden text-center text-sm leading-relaxed text-ellipsis whitespace-nowrap md:text-base md:leading-loose">
               {item.title}
             </span>
-            <span className="text-muted-foreground overflow-hidden text-center text-sm leading-none text-ellipsis whitespace-nowrap">
+            <span className="text-muted-foreground overflow-hidden text-center text-xs leading-none text-ellipsis whitespace-nowrap md:text-sm">
               {tagToString(item.tag)}
             </span>
           </div>

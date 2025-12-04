@@ -7,7 +7,8 @@ import { HomeRecommend } from '@/components/common/home-recommend'
 export default async function Home() {
   const data = await getHomeData({
     next: {
-      revalidate: 60
+      revalidate: 60,
+      tags: ['<Home_Data>']
     }
   })
   return (

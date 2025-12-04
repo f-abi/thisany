@@ -160,7 +160,40 @@ export const GYING_FILTER_GENRE_AC = [
   '纪录',
   '异世界'
 ]
-export const GYING_FILTER_YEAR = [120, 110, 100, 90, 80, 70, 60, 1]
+export const GYING_FILTER_YEAR = [
+  {
+    key: '20年代',
+    value: 120
+  },
+  {
+    key: '10年代',
+    value: 110
+  },
+  {
+    key: '00年代',
+    value: 100
+  },
+  {
+    key: '90年代',
+    value: 90
+  },
+  {
+    key: '80年代',
+    value: 80
+  },
+  {
+    key: '70年代',
+    value: 70
+  },
+  {
+    key: '60年代',
+    value: 60
+  },
+  {
+    key: '更早',
+    value: 1
+  }
+]
 export const GYING_FILTER_REGION = [
   '大陆',
   '香港',

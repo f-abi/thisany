@@ -11,8 +11,8 @@ interface Props {
 export function Header({ theme }: Props) {
   return (
     <header className="fixed top-0 z-99 box-border flex w-full p-2 select-none">
-      <div className="glass flex h-16 w-full items-center justify-center px-8">
-        <div className="flex h-full w-full items-center justify-between sm:max-w-7xl">
+      <div className="glass flex h-16 w-full items-center justify-center px-2 md:px-8">
+        <div className="flex h-full w-full items-center justify-between md:max-w-7xl">
           <div className="flex flex-row items-center">
             <Logo />
             <Nav />

@@ -11,11 +11,11 @@ import {
 interface PaginationBarProps {
   total: number
   current: number
-  baseUrl: string
+  pathName: string
   searchParams?: { [key: string]: string | string[] | undefined }
 }
 
-export function PaginationBar({ total, current, baseUrl, searchParams }: PaginationBarProps) {
+export function PaginationBar({ total, current, pathName, searchParams }: PaginationBarProps) {
   if (total <= 1) return null
 
   const createPageUrl = (page: number) => {
@@ -32,7 +32,7 @@ export function PaginationBar({ total, current, baseUrl, searchParams }: Paginat
       })
     }
     params.set('page', page.toString())
-    return `${baseUrl}?${params.toString()}`
+    return `${pathName}?${params.toString()}`
   }
 
   const renderPageNumbers = () => {
