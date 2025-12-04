@@ -10,7 +10,7 @@ export function MediaList({ data }: { data: Array<ListItemData> }) {
         <Link
           href={`/media/${item.dir}/${item.id}`}
           key={item.id}
-          className="flex flex-col overflow-hidden rounded-(--radius) p-1 backdrop-blur-xs backdrop-saturate-0 select-none hover:bg-(--app-blur-background) xl:p-2"
+          className="flex flex-col overflow-hidden rounded-lg p-1 backdrop-blur-xs backdrop-saturate-0 select-none hover:bg-(--app-blur-background) xl:p-2"
         >
           <div className="relative aspect-2/3">
             <Skeleton className="absolute top-0 z-[-1] h-full w-full" />
@@ -19,7 +19,7 @@ export function MediaList({ data }: { data: Array<ListItemData> }) {
               alt={item.title}
               width={200}
               height={300}
-              className="h-full w-full rounded-(--radius)"
+              className="h-full w-full rounded-lg"
               loading="lazy"
             />
           </div>

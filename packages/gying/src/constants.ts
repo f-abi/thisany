@@ -237,5 +237,30 @@ export const GYING_FILTER_LANG = [
   '西班牙语',
   '无对白'
 ]
-export const GYING_QUALITY_TAG = ['', '720P', '1080P', '4K', '3D', 'BD', 'HDR', 'DV', '原盘']
-export const GYING_SORT_TAG = ['', 'uptime', 'date', 'score', 'number', 'numbers', 'cscore']
+export const GYING_QUALITY_TAG = ['720P', '1080P', '4K', '3D', 'BD', 'HDR', 'DV', '原盘']
+export const GYING_SORT_TAG = [
+  {
+    key: '更新时间',
+    value: 'uptime'
+  },
+  {
+    key: '首播时间',
+    value: 'date'
+  },
+  {
+    key: '评分最高',
+    value: 'score'
+  },
+  {
+    key: '评分人数',
+    value: 'number'
+  },
+  {
+    key: '评分总人数',
+    value: 'numbers'
+  },
+  {
+    key: '综合评分',
+    value: 'cscore'
+  }
+]

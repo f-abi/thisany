@@ -46,7 +46,6 @@
 
 :root {
   --radius: 0.625rem;
-  /* --radius: 1rem; */
   --background: oklch(1 0 0);
   --foreground: oklch(0.145 0 0);
   --card: oklch(1 0 0);
@@ -134,6 +133,6 @@
 
 @layer components {
   .glass {
-    @apply rounded-(--radius) bg-(--app-blur-background) shadow-[0_5px_20px_var(--app-shadow)] backdrop-blur-md backdrop-saturate-200;
+    @apply rounded-lg bg-(--app-blur-background) shadow-[0_5px_20px_var(--app-shadow)] backdrop-blur-md backdrop-saturate-200;
   }
 }

@@ -17,14 +17,14 @@ export function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
               delay: 3_000
             })
           ]}
-          className="overflow-hidden rounded-(--radius)"
+          className="overflow-hidden rounded-lg"
         >
           <CarouselContent>
             {data.map(item => (
               <CarouselItem key={item.id}>
                 <Link
                   href={`/media/${item.dir}/${item.id}`}
-                  className="relative flex overflow-hidden rounded-(--radius)"
+                  className="relative flex overflow-hidden rounded-lg"
                 >
                   <Skeleton className="absolute top-0 z-[-1] h-full w-full" />
                   <Image
@@ -32,7 +32,7 @@ export function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
                     alt={item.title}
                     width={900}
                     height={400}
-                    className="aspect-9/4 w-full rounded-(--radius)"
+                    className="aspect-9/4 w-full rounded-lg"
                     loading="eager"
                   />
                   <div className="text-primary-foreground dark:text-foreground absolute bottom-2 overflow-hidden p-2 backdrop-blur-sm md:bottom-0 md:w-full md:rounded-b-(--radius) xl:p-4">

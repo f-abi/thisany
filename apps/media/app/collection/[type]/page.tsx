@@ -7,6 +7,8 @@ import {
   GYING_FILTER_LANG,
   GYING_FILTER_REGION,
   GYING_FILTER_YEAR,
+  GYING_QUALITY_TAG,
+  GYING_SORT_TAG,
   GYING_TYPE,
   VideoType
 } from 'gying'
@@ -34,7 +36,12 @@ function FilterLink({ isActive, href, text }: FilterLinkProps) {
   return (
     <Link
       href={href}
-      className={cn('m-1 px-2 py-1', isActive ? 'bg-accent-foreground/10 rounded-(--radius)' : '')}
+      className={cn(
+        'm-1 rounded-lg px-2 py-1',
+        isActive
+          ? 'bg-accent-foreground/10 text-destructive font-black'
+          : 'hover:bg-accent-foreground/10'
+      )}
     >
       {text}
     </Link>
@@ -81,6 +88,19 @@ function Filter({ pathName, searchParams, type }: FilterProps) {
         key: _,
         value: _
       }))
+    },
+    {
+      key: 'quality',
+      name: '画质',
+      value: GYING_QUALITY_TAG.map(_ => ({
+        key: _,
+        value: _
+      }))
+    },
+    {
+      key: 'sort',
+      name: '排序',
+      value: GYING_SORT_TAG
     }
   ]
   return filterLinkList.map(_ => (
@@ -159,6 +179,8 @@ export default async function CollectionPage({
     }
   })
 
+  console.log([type, ...Object.values(urlSearchParams)])
+
   return (
     <Main>
       <div className="glass mx-2 mb-2 flex flex-col p-2 xl:mx-0 xl:p-4">
@@ -166,14 +188,12 @@ export default async function CollectionPage({
       </div>
       <div className="glass mx-2 mb-2 flex flex-col p-2 xl:mx-0 xl:p-4">
         <MediaList data={data.items} />
-        <div className="mt-4">
-          <PaginationBar
-            total={data.pageTotal}
-            current={pageIndex}
-            pathName={pathName}
-            searchParams={urlSearchParams}
-          />
-        </div>
+        <PaginationBar
+          total={data.pageTotal}
+          current={pageIndex}
+          pathName={pathName}
+          searchParams={urlSearchParams}
+        />
       </div>
     </Main>
   )
