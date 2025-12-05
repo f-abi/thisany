@@ -8,8 +8,9 @@
     "lint": "turbo run lint",
     "test": "turbo run test",
     "fmt": "prettier --write .",
-    "prepare": "husky",
-    "cz": "czg"
+    "clean": "rm -rf node_modules pnpm-lock.yaml",
+    "cz": "czg",
+    "prepare": "husky"
   },
   "packageManager": "pnpm@10.22.0",
   "devDependencies": {

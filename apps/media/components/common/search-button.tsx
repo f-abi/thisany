@@ -1,12 +1,12 @@
 'use client'
 
 import { Button } from '@/components/ui/button'
-import { Search } from 'lucide-react'
+import { IconSearch } from '@tabler/icons-react'
 
 export function SearchButton() {
   return (
     <Button aria-label="搜索" size="icon-lg">
-      <Search />
+      <IconSearch />
     </Button>
   )
 }
