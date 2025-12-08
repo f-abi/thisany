@@ -1,3 +1,8 @@
+export enum COOKIE_NAME {
+  THEME = 'theme',
+  SIDEBAR = 'sidebar'
+}
+
 export const APP_NAV_CONFIG = [
   {
     type: 'mv',

@@ -1,11 +1,10 @@
 import type { Metadata } from 'next'
 import { Dosis } from 'next/font/google'
 import './globals.css'
-import type { AppTheme } from '@/types'
-import { cookies } from 'next/headers'
 import { Header } from '@/components/layout/header'
 import { HoleBackground } from '@/components/animate-ui/components/backgrounds/hole'
 import { Toaster } from '@/components/ui/sonner'
+import { getSidebarExpand, getTheme } from '@/lib/cookies'
 
 const dosis = Dosis({
   variable: '--font-dosis',
@@ -22,14 +21,13 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  const themeCookieStore = (await cookies()).get('theme')?.value
-  const theme =
-    themeCookieStore && ['light', 'dark'].includes(themeCookieStore)
-      ? (themeCookieStore as AppTheme)
-      : 'dark'
+  const theme = await getTheme()
+  const sidebarExpand = await getSidebarExpand()
   return (
-    <html className={theme} lang="zh-CN">
-      <body className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased`}>
+    <html className={`${theme} scroll-smooth`} lang="zh-CN">
+      <body
+        className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased ${sidebarExpand && 'sidebar-expand'}`}
+      >
         <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" />
         <Header theme={theme} />
         {children}
