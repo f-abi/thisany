@@ -5,7 +5,7 @@ import { Skeleton } from '../ui/skeleton'
 
 export function MediaList({ data }: { data: Array<ListItemData> }) {
   return (
-    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-2 lg:grid-cols-6 lg:gap-4">
+    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-4 lg:grid-cols-6">
       {data.map(item => (
         <Link
           href={`/media/${item.dir}/${item.id}`}

@@ -9,6 +9,7 @@ const nextConfig: NextConfig = {
   },
   transpilePackages: ['gying'],
   images: {
+    minimumCacheTTL: 31536000,
     remotePatterns: [
       {
         hostname: 'images.weserv.nl'

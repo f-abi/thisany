@@ -9,7 +9,7 @@ import Link from 'next/link'
 
 export function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
   return (
-    <div className="mb-2 flex w-full items-center pr-2">
+    <div className="mb-2 flex w-full items-center px-2 sm:pl-0">
       <div className="glass relative w-full p-2 xl:p-4">
         <Carousel
           plugins={[

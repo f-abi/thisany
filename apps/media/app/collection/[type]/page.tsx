@@ -24,7 +24,6 @@ import {
 } from '@tabler/icons-react'
 import {
   Sidebar,
-  SidebarContent,
   SidebarItem,
   SidebarItemMenu,
   SidebarItemMenuLink
@@ -94,51 +93,49 @@ function CollectionSidebar({ pathName, searchParams, type, expand }: CollectionS
   ]
   return (
     <Sidebar expand={expand}>
-      <SidebarContent>
-        {collectionSidebarConfig.map(({ Icon, ..._ }) => (
-          <SidebarItem
-            key={_.key}
-            Icon={Icon}
-            name={_.name}
-            isActive={_.key === 'genre' ? genreParams.length > 0 : !!searchParams[_.key]}
-          >
-            <SidebarItemMenu>
-              {_.value.map(__ => {
-                const isActive =
-                  _.key === 'genre'
-                    ? genreParams.includes(__.value)
-                    : searchParams[_.key] === __.value
-                const newURLSearchParams = new URLSearchParams(searchParams)
-                newURLSearchParams.delete('page')
-                if (_.key == 'genre') {
-                  if (genreParams.length === 0) newURLSearchParams.set('genre', __.value)
-                  else {
-                    if (isActive) {
-                      if (genreParams.length === 1) newURLSearchParams.delete('genre')
-                      else
-                        newURLSearchParams.set(
-                          'genre',
-                          genreParams.filter(___ => ___ !== __.value).join('_')
-                        )
-                    } else newURLSearchParams.set('genre', [...genreParams, __.value].join('_'))
-                  }
-                } else {
-                  if (isActive) newURLSearchParams.delete(_.key)
-                  else newURLSearchParams.set(_.key, __.value)
+      {collectionSidebarConfig.map(({ Icon, ..._ }) => (
+        <SidebarItem
+          key={_.key}
+          Icon={Icon}
+          name={_.name}
+          isActive={_.key === 'genre' ? genreParams.length > 0 : !!searchParams[_.key]}
+        >
+          <SidebarItemMenu>
+            {_.value.map(__ => {
+              const isActive =
+                _.key === 'genre'
+                  ? genreParams.includes(__.value)
+                  : searchParams[_.key] === __.value
+              const newURLSearchParams = new URLSearchParams(searchParams)
+              newURLSearchParams.delete('page')
+              if (_.key == 'genre') {
+                if (genreParams.length === 0) newURLSearchParams.set('genre', __.value)
+                else {
+                  if (isActive) {
+                    if (genreParams.length === 1) newURLSearchParams.delete('genre')
+                    else
+                      newURLSearchParams.set(
+                        'genre',
+                        genreParams.filter(___ => ___ !== __.value).join('_')
+                      )
+                  } else newURLSearchParams.set('genre', [...genreParams, __.value].join('_'))
                 }
-                return (
-                  <SidebarItemMenuLink
-                    href={`${pathName}?${newURLSearchParams.toString()}`}
-                    isActive={isActive}
-                    key={__.key}
-                    name={__.key}
-                  />
-                )
-              })}
-            </SidebarItemMenu>
-          </SidebarItem>
-        ))}
-      </SidebarContent>
+              } else {
+                if (isActive) newURLSearchParams.delete(_.key)
+                else newURLSearchParams.set(_.key, __.value)
+              }
+              return (
+                <SidebarItemMenuLink
+                  href={`${pathName}?${newURLSearchParams.toString()}`}
+                  isActive={isActive}
+                  key={__.key}
+                  name={__.key}
+                />
+              )
+            })}
+          </SidebarItemMenu>
+        </SidebarItem>
+      ))}
     </Sidebar>
   )
 }
@@ -168,8 +165,7 @@ export default async function CollectionPage({
     ...urlSearchParams,
     options: {
       next: {
-        revalidate: 60,
-        tags: [type, ...Object.values(urlSearchParams)]
+        revalidate: 60
       }
     }
   })

@@ -4,7 +4,7 @@ import { HomeBanner } from '@/components/common/home-banner'
 import { Main } from '@/components/layout/main'
 import { HomeRecommend } from '@/components/common/home-recommend'
 import { IconDeviceTvOldFilled, IconGhost2Filled, IconVideoFilled } from '@tabler/icons-react'
-import { Sidebar, SidebarContent, SidebarItem } from '@/components/layout/sidebar'
+import { Sidebar, SidebarItem } from '@/components/layout/sidebar'
 import { getSidebarExpand } from '@/lib/cookies'
 
 export default async function Home() {
@@ -40,11 +40,9 @@ export default async function Home() {
   return (
     <Main>
       <Sidebar expand={sidebarExpand}>
-        <SidebarContent>
-          {sidebarConfig.map(item => (
-            <SidebarItem key={item.key} Icon={item.Icon} name={item.name} href={item.href} />
-          ))}
-        </SidebarContent>
+        {sidebarConfig.map(item => (
+          <SidebarItem key={item.key} Icon={item.Icon} name={item.name} />
+        ))}
       </Sidebar>
       <div className="sidebar-page flex flex-col transition-all">
         <HomeBanner data={data.banner} />
