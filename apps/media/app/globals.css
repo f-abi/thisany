@@ -136,4 +136,7 @@
   .glass {
     @apply rounded-lg bg-(--app-blur-background) shadow-[0_5px_20px_var(--app-shadow)] backdrop-blur-md backdrop-saturate-200;
   }
+  .sidebar-page {
+    @apply sm:sidebar-expand:ml-38 sm:ml-18;
+  }
 }

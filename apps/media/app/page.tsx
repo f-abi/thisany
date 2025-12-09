@@ -12,8 +12,7 @@ export default async function Home() {
 
   const data = await getHomeData({
     next: {
-      revalidate: 60,
-      tags: ['<Home_Data>']
+      revalidate: 600
     }
   })
 
@@ -47,7 +46,7 @@ export default async function Home() {
           ))}
         </SidebarContent>
       </Sidebar>
-      <div className="sidebar-expand:ml-38 flex flex-col transition-all md:ml-18">
+      <div className="sidebar-page flex flex-col transition-all">
         <HomeBanner data={data.banner} />
         {data.recommend.map(item => (
           <HomeRecommend key={item.type} item={item} />

@@ -24,7 +24,7 @@ export default async function RootLayout({
   const theme = await getTheme()
   const sidebarExpand = await getSidebarExpand()
   return (
-    <html className={`${theme} scroll-smooth`} lang="zh-CN">
+    <html className={theme} lang="zh-CN">
       <body
         className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased ${sidebarExpand && 'sidebar-expand'}`}
       >

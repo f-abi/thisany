@@ -182,7 +182,7 @@ export default async function CollectionPage({
         type={type}
         expand={sidebarExpand}
       />
-      <div className="glass sidebar-expand:ml-38 mr-2 mb-2 ml-18 flex flex-col p-2 transition-all xl:p-4 2xl:mr-0">
+      <div className="sidebar-page glass mr-2 mb-2 flex flex-col p-2 transition-all xl:p-4 2xl:mr-0">
         <MediaList data={data.items} />
         <PaginationBar
           total={data.pageTotal}

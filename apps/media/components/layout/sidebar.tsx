@@ -6,10 +6,15 @@ import { SidebarBottom } from '@/components/common/sidebar-bottom'
 
 function Sidebar({ expand, children }: PropsWithChildren<{ expand: boolean }>) {
   return (
-    <aside className="group sidebar-expand:w-34 fixed top-20 bottom-2 z-10 ml-2 flex w-14 flex-col justify-between py-2 transition-all select-none hover:w-34 [@media(hover:none)]:focus-within:w-34">
+    <aside className="group sidebar-expand:w-34 fixed top-20 bottom-2 z-10 ml-2 hidden w-14 flex-col justify-between py-2 transition-all select-none hover:w-34 sm:flex [@media(hover:none)]:focus-within:w-34">
       <div className="glass absolute inset-0 -z-10" />
       {children}
-      <SidebarBottom expand={expand} />
+      <div className="mb-2 flex w-full flex-col">
+        <div className="px-2">
+          <div className="bg-accent-foreground/10 h-px w-full" />
+        </div>
+        <SidebarBottom expand={expand} />
+      </div>
     </aside>
   )
 }
@@ -73,7 +78,7 @@ function SidebarItemMenuLink({
     <Link
       href={href}
       className={cn(
-        'hover:bg-accent-foreground/10 hover:text-destructive m-1 rounded-lg px-2 py-1',
+        'hover:bg-accent-foreground/10 m-1 rounded-lg px-2 py-1',
         isActive && 'bg-accent-foreground/10 text-destructive'
       )}
     >

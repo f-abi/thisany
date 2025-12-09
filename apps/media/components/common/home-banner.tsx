@@ -9,8 +9,8 @@ import Link from 'next/link'
 
 export function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
   return (
-    <div className="mb-2 flex w-full items-center px-2 xl:px-0">
-      <div className="glass relative w-full p-1 xl:p-4">
+    <div className="mb-2 flex w-full items-center pr-2">
+      <div className="glass relative w-full p-2 xl:p-4">
         <Carousel
           plugins={[
             Autoplay({
@@ -35,7 +35,7 @@ export function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
                     className="aspect-9/4 w-full rounded-lg"
                     loading="eager"
                   />
-                  <div className="text-primary-foreground dark:text-foreground absolute bottom-2 overflow-hidden p-2 backdrop-blur-sm md:bottom-0 md:w-full md:rounded-b-(--radius) xl:p-4">
+                  <div className="text-primary-foreground dark:text-foreground absolute bottom-2 overflow-hidden rounded-lg p-1 px-2 backdrop-blur-sm md:bottom-0 md:w-full md:rounded-b-(--radius) xl:p-4">
                     <div className="font-bold md:pb-1 md:text-xl xl:pb-2 xl:text-2xl">
                       {item.title}
                     </div>

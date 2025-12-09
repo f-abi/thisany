@@ -24,7 +24,7 @@ export function MediaList({ data }: { data: Array<ListItemData> }) {
             />
           </div>
           <div className="flex flex-col">
-            <span className="overflow-hidden text-center text-sm leading-relaxed text-ellipsis whitespace-nowrap md:text-base md:leading-loose">
+            <span className="overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap md:text-base md:leading-loose">
               {item.title}
             </span>
             <span className="text-muted-foreground overflow-hidden text-center text-xs leading-none text-ellipsis whitespace-nowrap md:text-sm">

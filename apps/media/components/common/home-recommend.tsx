@@ -29,7 +29,7 @@ export function HomeRecommend({ item }: { item: HomeRecommendType }) {
   }
 
   return (
-    <div id={item.type} className="glass mx-2 mb-2 flex scroll-mt-20 flex-col p-2 xl:mx-0 xl:p-4">
+    <div id={item.type} className="glass mx-2 mb-2 flex scroll-mt-20 flex-col p-2 sm:ml-0 xl:p-4">
       <div className="mb-1 flex flex-row items-center justify-between md:mb-2">
         <div className="text-lg font-black md:text-2xl md:font-bold">{item.title}</div>
         <Button onClick={handleRefresh} disabled={isPending} size="sm">
