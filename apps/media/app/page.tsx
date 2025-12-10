@@ -7,35 +7,35 @@ import { IconDeviceTvOldFilled, IconGhost2Filled, IconVideoFilled } from '@table
 import { Sidebar, SidebarItem } from '@/components/layout/sidebar'
 import { getSidebarExpand } from '@/lib/cookies'
 
+const sidebarConfig = [
+  {
+    Icon: IconVideoFilled,
+    key: 'mv',
+    name: '最新电影',
+    href: '/#mv'
+  },
+  {
+    Icon: IconDeviceTvOldFilled,
+    key: 'tv',
+    name: '最新剧集',
+    href: '/#tv'
+  },
+  {
+    Icon: IconGhost2Filled,
+    key: 'ac',
+    name: '最新动漫',
+    href: '/#ac'
+  }
+]
+
 export default async function Home() {
   const sidebarExpand = await getSidebarExpand()
 
   const data = await getHomeData({
     next: {
-      revalidate: 600
+      revalidate: 6000
     }
   })
-
-  const sidebarConfig = [
-    {
-      Icon: IconVideoFilled,
-      key: 'mv',
-      name: '最新电影',
-      href: '/#mv'
-    },
-    {
-      Icon: IconDeviceTvOldFilled,
-      key: 'tv',
-      name: '最新剧集',
-      href: '/#tv'
-    },
-    {
-      Icon: IconGhost2Filled,
-      key: 'ac',
-      name: '最新动漫',
-      href: '/#ac'
-    }
-  ]
 
   return (
     <Main>

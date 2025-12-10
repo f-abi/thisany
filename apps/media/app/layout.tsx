@@ -1,15 +1,22 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Dosis } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
-import { HoleBackground } from '@/components/animate-ui/components/backgrounds/hole'
+import { Background } from '@/components/common/background'
 import { Toaster } from '@/components/ui/sonner'
+import { Mask } from '@/components/common/mask'
 import { getSidebarExpand, getTheme } from '@/lib/cookies'
 
 const dosis = Dosis({
   variable: '--font-dosis',
   subsets: ['latin']
 })
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
+  viewportFit: 'cover'
+}
 
 export const metadata: Metadata = {
   title: 'Create Next App',
@@ -24,14 +31,15 @@ export default async function RootLayout({
   const theme = await getTheme()
   const sidebarExpand = await getSidebarExpand()
   return (
-    <html className={theme} lang="zh-CN">
+    <html lang="zh-CN" className={theme}>
       <body
         className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased ${sidebarExpand && 'sidebar-expand'}`}
       >
-        <HoleBackground className="fixed top-0 left-0 z-[-1] h-full w-full" />
+        <Background />
         <Header theme={theme} />
         {children}
         <Toaster theme={theme} />
+        <Mask />
       </body>
     </html>
   )

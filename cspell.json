@@ -22,6 +22,7 @@
     "KHTML",
     "Kloc",
     "lucide",
+    "partialize",
     "PHPSESSID",
     "Prefixs",
     "rrange",
@@ -33,7 +34,8 @@
     "tabler",
     "tname",
     "weserv",
-    "zhuyan"
+    "zhuyan",
+    "zustand"
   ],
   "ignorePaths": [
     "**/node_modules/**",
