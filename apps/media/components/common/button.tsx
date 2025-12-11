@@ -9,12 +9,11 @@ import {
   IconLayoutSidebarLeftExpandFilled,
   IconSearch
 } from '@tabler/icons-react'
-import { useMaskStore } from '@/store/mask'
 import { useEffect, useState } from 'react'
 import { COOKIE_NAME } from '@/constants'
 import { SidebarItem } from '../layout/sidebar'
 import { AppTheme } from '@/types'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../ui/tabs'
+import { BlurMask } from './mask'
 
 function handleBlur() {
   const active = document.activeElement as HTMLElement
@@ -24,55 +23,31 @@ function handleBlur() {
 }
 
 function SettingButton() {
-  const { show, hide, visible } = useMaskStore()
+  const [visible, setVisible] = useState(false)
 
-  const handleClick = () => {
-    show(
-      <Tabs defaultValue="account" className="flex size-full items-center justify-center">
-        <TabsList>
-          <TabsTrigger value="account">主题</TabsTrigger>
-          <TabsTrigger value="password">背景</TabsTrigger>
-          <TabsTrigger value="c">CCC</TabsTrigger>
-          <TabsTrigger value="d">DDD</TabsTrigger>
-        </TabsList>
-        <TabsContent value="account">
-          <div>主题</div>
-          <div>主题</div>
-          <div>主题</div>
-          <div>主题</div>
-          <div>主题</div>
-        </TabsContent>
-        <TabsContent value="password">
-          <div>背景</div>
-          <div>背景</div>
-          <div>背景</div>
-          <div>背景</div>
-          <div>背景</div>
-          <div>背景</div>
-          <div>背景</div>
-          <div>背景</div>
-        </TabsContent>
-      </Tabs>
-    )
-  }
   return (
-    <Button aria-label="设置" size="icon-lg" onClick={handleClick}>
-      <IconBackground />
-    </Button>
+    <>
+      <Button aria-label="设置" size="icon-lg" onClick={() => setVisible(!visible)}>
+        <IconBackground />
+      </Button>
+      <BlurMask visible={visible}>
+        <div>设置设置</div>
+      </BlurMask>
+    </>
   )
 }
 
 function SearchButton() {
-  const { show, hide, visible } = useMaskStore()
-
-  const handleClick = () => {
-    show(<div>搜索</div>)
-  }
-
+  const [visible, setVisible] = useState(false)
   return (
-    <Button aria-label="搜索" size="icon-lg" onClick={handleClick}>
-      <IconSearch />
-    </Button>
+    <>
+      <Button aria-label="搜索" size="icon-lg" onClick={() => setVisible(!visible)}>
+        <IconSearch />
+      </Button>
+      <BlurMask visible={visible}>
+        <div>搜索搜索搜索搜索搜索</div>
+      </BlurMask>
+    </>
   )
 }
 

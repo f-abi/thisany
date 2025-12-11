@@ -4,7 +4,6 @@ import './globals.css'
 import { Header } from '@/components/layout/header'
 import { Background } from '@/components/common/background'
 import { Toaster } from '@/components/ui/sonner'
-import { Mask } from '@/components/common/mask'
 import { getSidebarExpand, getTheme } from '@/lib/cookies'
 
 const dosis = Dosis({
@@ -39,7 +38,6 @@ export default async function RootLayout({
         <Header theme={theme} />
         {children}
         <Toaster theme={theme} />
-        <Mask />
       </body>
     </html>
   )

@@ -1,9 +1,9 @@
 'use client'
 
 import { cn } from '@/lib/utils'
+import { AnimatePresence, motion } from 'motion/react'
 import { MouseEventHandler, PropsWithChildren, useEffect, useState } from 'react'
 import { createPortal } from 'react-dom'
-import { useMaskStore } from '@/store/mask'
 
 interface MaskProps {
   visible: boolean
@@ -12,57 +12,43 @@ interface MaskProps {
 }
 
 function BlurMask({ children, visible, className, onClick }: PropsWithChildren<MaskProps>) {
+  const [mounted] = useState(() => typeof window !== 'undefined')
+
   useEffect(() => {
     if (!visible) return
 
-    const preventDefault = (e: Event) => {
-      e.preventDefault()
-    }
-
-    const options = { passive: false } as AddEventListenerOptions
-
-    document.addEventListener('wheel', preventDefault, options)
-    document.addEventListener('touchmove', preventDefault, options)
+    document.addEventListener('wheel', e => e.preventDefault(), { passive: false })
+    document.addEventListener('touchmove', e => e.preventDefault(), { passive: false })
 
     return () => {
-      document.removeEventListener('wheel', preventDefault, options)
-      document.removeEventListener('touchmove', preventDefault, options)
+      document.removeEventListener('wheel', e => e.preventDefault())
+      document.removeEventListener('touchmove', e => e.preventDefault())
     }
   }, [visible])
 
   return (
-    <div
-      className={cn(
-        'fixed top-0 left-0 z-90 flex h-dvh w-dvw items-center justify-center transition-all',
-        visible ? 'visible opacity-100' : 'invisible opacity-0',
-        className
-      )}
-      onClick={onClick}
-    >
-      {children}
-    </div>
+    mounted &&
+    createPortal(
+      <AnimatePresence>
+        {visible && (
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.3 }}
+            className={cn(
+              'fixed top-0 left-0 z-90 flex h-dvh w-dvw items-center justify-center backdrop-blur-md',
+              className
+            )}
+            onClick={onClick}
+          >
+            {children}
+          </motion.div>
+        )}
+      </AnimatePresence>,
+      document.body
+    )
   )
 }
 
-function Mask() {
-  const { visible, content, hide } = useMaskStore()
-  const [mounted, setMounted] = useState(false)
-
-  useEffect(() => {
-    const timer = setTimeout(() => {
-      setMounted(true)
-    }, 0)
-    return () => clearTimeout(timer)
-  }, [])
-
-  if (!mounted) return null
-
-  return createPortal(
-    <BlurMask visible={visible} onClick={hide}>
-      {content}
-    </BlurMask>,
-    document.body
-  )
-}
-
-export { Mask }
+export { BlurMask }
