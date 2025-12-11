@@ -33,13 +33,13 @@ function BlurMask({ children, visible, className, onClick }: PropsWithChildren<M
   return (
     <div
       className={cn(
-        'glass fixed top-0 left-0 z-90 h-dvh w-dvw rounded-none transition-all',
-        visible ? 'visible opacity-100 backdrop-blur-md' : 'invisible opacity-0 backdrop-blur-none',
+        'fixed top-0 left-0 z-90 flex h-dvh w-dvw items-center justify-center transition-all',
+        visible ? 'visible opacity-100' : 'invisible opacity-0',
         className
       )}
       onClick={onClick}
     >
-      <div onClick={e => e.stopPropagation()}>{children}</div>
+      {children}
     </div>
   )
 }

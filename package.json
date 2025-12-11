@@ -12,15 +12,15 @@
     "cz": "czg",
     "prepare": "husky"
   },
-  "packageManager": "pnpm@10.22.0",
+  "packageManager": "pnpm@10.25.0",
   "devDependencies": {
-    "turbo": "catalog:",
     "@commitlint/cli": "catalog:",
     "@commitlint/config-conventional": "catalog:",
+    "czg": "catalog:",
     "husky": "catalog:",
     "lint-staged": "catalog:",
-    "czg": "catalog:",
     "prettier": "catalog:",
-    "prettier-plugin-tailwindcss": "catalog:"
+    "prettier-plugin-tailwindcss": "catalog:",
+    "turbo": "catalog:"
   }
 }

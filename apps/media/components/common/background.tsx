@@ -25,7 +25,7 @@ const appBackgroundConfig = {
   )
 }
 
-export function Background() {
+function Background() {
   const { background } = useAppStore()
   const renderBackground = appBackgroundConfig[background]
 
@@ -39,3 +39,5 @@ export function Background() {
     className: 'fixed inset-0 z-[-1] size-full transform-gpu'
   })
 }
+
+export { Background }

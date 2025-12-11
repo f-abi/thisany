@@ -12,7 +12,6 @@ import {
   VideoType
 } from 'gying'
 import { notFound } from 'next/navigation'
-import { MediaList } from '@/components/common/media-list'
 import { PaginationBar } from '@/components/common/pagination-bar'
 import {
   IconBadgeHdFilled,
@@ -29,6 +28,7 @@ import {
   SidebarItemMenuLink
 } from '@/components/layout/sidebar'
 import { getSidebarExpand } from '@/lib/cookies'
+import { MediaLinkList } from '@/components/common/link'
 
 type SearchParams = Record<string, string>
 
@@ -179,7 +179,7 @@ export default async function CollectionPage({
         expand={sidebarExpand}
       />
       <div className="sidebar-page glass mr-2 mb-2 flex flex-col p-2 transition-all xl:p-4 2xl:mr-0">
-        <MediaList data={data.items} />
+        <MediaLinkList data={data.items} />
         <PaginationBar
           total={data.pageTotal}
           current={pageIndex}

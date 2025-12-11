@@ -2,7 +2,7 @@ import { cn } from '@/lib/utils'
 import { Icon, IconProps } from '@tabler/icons-react'
 import Link from 'next/link'
 import { ForwardRefExoticComponent, PropsWithChildren, RefAttributes } from 'react'
-import { SidebarBottomButton } from '@/components/common/sidebar-button'
+import { SidebarBottomButton } from '@/components/common/button'
 
 function Sidebar({ expand, children }: PropsWithChildren<{ expand: boolean }>) {
   return (

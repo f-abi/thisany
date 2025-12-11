@@ -1,7 +1,6 @@
 import type { AppTheme } from '@/types'
-import { ThemeButton } from '@/components/common/theme-button'
+import { ThemeButton, SearchButton, SettingButton } from '@/components/common/button'
 import { Logo } from '@/components/common/logo'
-import { SearchButton } from '@/components/common/search-button'
 import { Nav } from '@/components/layout/nav'
 
 interface Props {
@@ -18,6 +17,7 @@ export function Header({ theme }: Props) {
             <Nav />
           </div>
           <div className="flex gap-2">
+            <SettingButton />
             <SearchButton />
             <ThemeButton theme={theme} />
           </div>

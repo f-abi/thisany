@@ -1,8 +1,7 @@
 import { getHomeData } from 'gying'
 
-import { HomeBanner } from '@/components/common/home-banner'
+import { HomeBanner, HomeRecommend } from '@/components/common/home'
 import { Main } from '@/components/layout/main'
-import { HomeRecommend } from '@/components/common/home-recommend'
 import { IconDeviceTvOldFilled, IconGhost2Filled, IconVideoFilled } from '@tabler/icons-react'
 import { Sidebar, SidebarItem } from '@/components/layout/sidebar'
 import { getSidebarExpand } from '@/lib/cookies'

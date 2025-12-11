@@ -136,7 +136,32 @@
   .glass {
     @apply rounded-lg bg-(--app-blur-background) shadow-[0_5px_20px_var(--app-shadow)] backdrop-blur-md backdrop-saturate-200;
   }
+
   .sidebar-page {
     @apply sm:sidebar-expand:ml-38 sm:ml-18;
+  }
+
+  .media-link {
+    @apply flex flex-col overflow-hidden rounded-lg p-1 select-none hover:bg-(--app-blur-background) xl:p-2 [@media(hover:none)]:focus-within:bg-(--app-blur-background);
+  }
+
+  .media-link_title {
+    @apply overflow-hidden text-center text-sm leading-loose text-ellipsis whitespace-nowrap md:text-base;
+  }
+
+  .media-link_tag {
+    @apply text-muted-foreground overflow-hidden text-center text-xs leading-none text-ellipsis whitespace-nowrap md:text-sm;
+  }
+
+  .image {
+    @apply h-full w-full rounded-lg;
+  }
+
+  .image-tag {
+    @apply text-primary-foreground dark:text-foreground px-2 py-0.5 text-xs backdrop-blur-md backdrop-saturate-200 transition-all md:px-4 md:text-sm;
+  }
+
+  .image-skeleton {
+    @apply absolute top-0 z-[-1] flex h-full w-full flex-col items-center justify-center gap-2;
   }
 }
