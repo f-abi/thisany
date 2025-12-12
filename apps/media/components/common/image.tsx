@@ -21,13 +21,15 @@ function MediaLinkImage({ item }: { item: ListItemData }) {
   const [isError, setIsError] = useState(false)
   return (
     <div className="relative aspect-2/3">
-      <ImageSkeleton isError={isError} isLoading={isLoading} />
-      <div className={'image-tag absolute top-4 left-0 rounded-r-sm'}>
-        {item.pf === 0 ? '暂无评分' : item.pf.toFixed(1)}
+      <div className="absolute inset-0 z-1 h-full w-full">
+        <ImageSkeleton isError={isError} isLoading={isLoading} />
+        <div className={'image-tag absolute top-4 left-0 rounded-r-sm'}>
+          {item.pf === 0 ? '暂无评分' : item.pf.toFixed(1)}
+        </div>
+        {item.xle && item.xle.length > 0 && (
+          <div className={'image-tag absolute right-0 bottom-4 rounded-l-sm'}>{item.xle}</div>
+        )}
       </div>
-      {item.xle && item.xle.length > 0 && (
-        <div className={'image-tag absolute right-0 bottom-4 rounded-l-sm'}>{item.xle}</div>
-      )}
       <Image
         src={item.image}
         alt={item.title}

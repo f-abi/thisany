@@ -18,6 +18,7 @@ export const useAppStore = create<AppState>()(
     {
       name: 't_a_m_s',
       partialize: state => ({ background: state.background }),
+      version: 1,
       skipHydration: true
     }
   )

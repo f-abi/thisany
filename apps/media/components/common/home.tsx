@@ -13,7 +13,7 @@ import { IconLoader2, IconReload } from '@tabler/icons-react'
 function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
   return (
     <div className="mb-2 flex w-full items-center px-2 sm:pl-0">
-      <div className="glass relative w-full p-2 xl:p-4">
+      <div className="card relative w-full p-2 xl:p-4">
         <Carousel
           plugins={[
             Autoplay({
@@ -62,7 +62,7 @@ function HomeRecommend({ item }: { item: HomeRecommendType }) {
   }
 
   return (
-    <div id={item.type} className="glass mx-2 mb-2 flex scroll-mt-20 flex-col p-2 sm:ml-0 xl:p-4">
+    <div id={item.type} className="card mx-2 mb-2 flex scroll-mt-20 flex-col p-2 sm:ml-0 xl:p-4">
       <div className="mb-1 flex flex-row items-center justify-between md:mb-2">
         <div className="text-lg font-black md:text-xl md:font-bold lg:text-2xl">{item.title}</div>
         <Button onClick={handleRefresh} disabled={isPending} size="sm">

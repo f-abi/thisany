@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/static-components */
 'use client'
 
 import * as React from 'react'
@@ -53,17 +54,6 @@ function mergeProps<T extends HTMLElement>(
   return merged
 }
 
-const motionCache = new Map<React.ElementType, React.ElementType>()
-
-function getMotionComponent(Component: React.ElementType) {
-  if (motionCache.has(Component)) {
-    return motionCache.get(Component)!
-  }
-  const MotionComponent = motion.create(Component as any)
-  motionCache.set(Component, MotionComponent)
-  return MotionComponent
-}
-
 function Slot<T extends HTMLElement = HTMLElement>({ children, ref, ...props }: SlotProps<T>) {
   const isAlreadyMotion =
     typeof children.type === 'object' && children.type !== null && isMotionComponent(children.type)
@@ -72,7 +62,7 @@ function Slot<T extends HTMLElement = HTMLElement>({ children, ref, ...props }: 
     () =>
       isAlreadyMotion
         ? (children.type as React.ElementType)
-        : getMotionComponent(children.type as React.ElementType),
+        : motion.create(children.type as React.ElementType),
     [isAlreadyMotion, children.type]
   )
 

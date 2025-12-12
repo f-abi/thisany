@@ -178,14 +178,16 @@ export default async function CollectionPage({
         type={type}
         expand={sidebarExpand}
       />
-      <div className="sidebar-page glass mr-2 mb-2 flex flex-col p-2 transition-all xl:p-4 2xl:mr-0">
-        <MediaLinkList data={data.items} />
-        <PaginationBar
-          total={data.pageTotal}
-          current={pageIndex}
-          pathName={pathName}
-          searchParams={urlSearchParams}
-        />
+      <div className="sidebar-page flex flex-col transition-all">
+        <div className="card mx-2 mb-2 p-2 transition-all sm:ml-0 xl:p-4">
+          <MediaLinkList data={data.items} />
+          <PaginationBar
+            total={data.pageTotal}
+            current={pageIndex}
+            pathName={pathName}
+            searchParams={urlSearchParams}
+          />
+        </div>
       </div>
     </Main>
   )

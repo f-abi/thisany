@@ -5,9 +5,17 @@ import {
   IconBackground,
   IconBrightness,
   IconBrightnessFilled,
+  IconCategory,
+  IconCategoryFilled,
+  IconClock,
+  IconClockFilled,
+  IconLayoutList,
+  IconLayoutListFilled,
   IconLayoutSidebarLeftCollapseFilled,
   IconLayoutSidebarLeftExpandFilled,
-  IconSearch
+  IconSearch,
+  IconStack2,
+  IconStack2Filled
 } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
 import { COOKIE_NAME } from '@/constants'
@@ -22,6 +30,36 @@ function handleBlur() {
   }
 }
 
+function HistoryButton() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <Button aria-label="历史" size="icon-lg" onClick={() => setVisible(!visible)}>
+        {visible ? <IconClock /> : <IconClockFilled />}
+      </Button>
+      <BlurMask visible={visible}>
+        <div>历史</div>
+      </BlurMask>
+    </>
+  )
+}
+
+function CollectionButton() {
+  const [visible, setVisible] = useState(false)
+
+  return (
+    <>
+      <Button aria-label="分类" size="icon-lg" onClick={() => setVisible(!visible)}>
+        {visible ? <IconCategory /> : <IconCategoryFilled />}
+      </Button>
+      <BlurMask visible={visible}>
+        <div>分类</div>
+      </BlurMask>
+    </>
+  )
+}
+
 function SettingButton() {
   const [visible, setVisible] = useState(false)
 
@@ -31,7 +69,7 @@ function SettingButton() {
         <IconBackground />
       </Button>
       <BlurMask visible={visible}>
-        <div>设置设置</div>
+        <div className="">123456</div>
       </BlurMask>
     </>
   )
@@ -109,4 +147,11 @@ function SidebarBottomButton({ expand: init }: { expand: boolean }) {
   )
 }
 
-export { SearchButton, SidebarBottomButton, ThemeButton, SettingButton }
+export {
+  SearchButton,
+  SidebarBottomButton,
+  ThemeButton,
+  SettingButton,
+  CollectionButton,
+  HistoryButton
+}

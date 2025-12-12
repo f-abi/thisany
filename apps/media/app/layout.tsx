@@ -34,7 +34,7 @@ export default async function RootLayout({
       <body
         className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased ${sidebarExpand && 'sidebar-expand'}`}
       >
-        <Background />
+        {/* <Background /> */}
         <Header theme={theme} />
         {children}
         <Toaster theme={theme} />

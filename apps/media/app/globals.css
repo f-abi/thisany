@@ -43,6 +43,9 @@
   --radius-xl: calc(var(--radius) + 4px);
 
   --app-shadow: rgba(0, 0, 0, 0.1);
+  --app-muted-shadow: rgba(116, 116, 116, 0.1);
+  --app-glass-shadow: 0 5px 20px var(--app-shadow);
+  --app-item-shadow: inset 0 0 25px 0 var(--app-muted-shadow), 0 0 0 0 var(--app-shadow);
 }
 
 :root {
@@ -79,7 +82,8 @@
   --sidebar-border: oklch(0.922 0 0);
   --sidebar-ring: oklch(0.708 0 0);
 
-  --app-background: #f2f4f7;
+  --app-background: rgb(242, 244, 247);
+  --app-card-background: rgb(255, 255, 255);
   --app-blur-background: rgba(245, 245, 245, 0.75);
 }
 
@@ -116,7 +120,8 @@
   --sidebar-border: oklch(1 0 0 / 10%);
   --sidebar-ring: oklch(0.556 0 0);
 
-  --app-background: #1b1d1f;
+  --app-background: rgb(27, 29, 31);
+  --app-card-background: rgb(45, 46, 47);
   --app-blur-background: rgba(46, 46, 46, 0.65);
 }
 
@@ -128,13 +133,17 @@
     @apply overflow-y-scroll;
   }
   body {
-    @apply text-foreground bg-background;
+    @apply text-foreground bg-(--app-background);
   }
 }
 
 @layer components {
   .glass {
-    @apply rounded-lg bg-(--app-blur-background) shadow-[0_5px_20px_var(--app-shadow)] backdrop-blur-md backdrop-saturate-200;
+    @apply rounded-lg bg-(--app-blur-background) shadow-(--app-glass-shadow) backdrop-blur-md backdrop-saturate-200;
+  }
+
+  .card {
+    @apply rounded-lg bg-(--app-card-background);
   }
 
   .sidebar-page {
@@ -142,7 +151,7 @@
   }
 
   .media-link {
-    @apply flex flex-col overflow-hidden rounded-lg p-1 select-none hover:bg-(--app-blur-background) xl:p-2 [@media(hover:none)]:focus-within:bg-(--app-blur-background);
+    @apply hover:bg-accent-foreground/10 flex flex-col overflow-hidden rounded-lg p-1 shadow-(--app-item-shadow) transition-[background-color] select-none xl:p-2 [@media(hover:none)]:focus-within:bg-(--app-blur-background);
   }
 
   .media-link_title {
