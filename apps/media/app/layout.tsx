@@ -2,9 +2,9 @@ import type { Metadata, Viewport } from 'next'
 import { Dosis } from 'next/font/google'
 import './globals.css'
 import { Header } from '@/components/layout/header'
-import { Background } from '@/components/common/background'
 import { Toaster } from '@/components/ui/sonner'
 import { getSidebarExpand, getTheme } from '@/lib/cookies'
+import Providers from './providers'
 
 const dosis = Dosis({
   variable: '--font-dosis',
@@ -34,9 +34,8 @@ export default async function RootLayout({
       <body
         className={`${dosis.variable} max-w-screen overflow-x-hidden antialiased ${sidebarExpand && 'sidebar-expand'}`}
       >
-        {/* <Background /> */}
         <Header theme={theme} />
-        {children}
+        <Providers>{children}</Providers>
         <Toaster theme={theme} />
       </body>
     </html>

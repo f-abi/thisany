@@ -1,5 +1,5 @@
 import { cn } from '@/lib/utils'
-import { Icon, IconProps } from '@tabler/icons-react'
+import { IconProps } from '@tabler/icons-react'
 import Link from 'next/link'
 import { ForwardRefExoticComponent, PropsWithChildren, RefAttributes } from 'react'
 import { SidebarBottomButton } from '@/components/common/button'
@@ -27,7 +27,7 @@ function SidebarItem({
 }: PropsWithChildren<{
   name: string
   isActive?: boolean
-  Icon: ForwardRefExoticComponent<IconProps & RefAttributes<Icon>>
+  Icon: ForwardRefExoticComponent<IconProps & RefAttributes<SVGSVGElement>>
 }>) {
   return (
     <div tabIndex={0} className="group/item relative cursor-pointer p-2 outline-none">

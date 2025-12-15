@@ -9,19 +9,19 @@ import {
   IconCategoryFilled,
   IconClock,
   IconClockFilled,
-  IconLayoutList,
-  IconLayoutListFilled,
   IconLayoutSidebarLeftCollapseFilled,
   IconLayoutSidebarLeftExpandFilled,
-  IconSearch,
-  IconStack2,
-  IconStack2Filled
+  IconSearch
 } from '@tabler/icons-react'
 import { useEffect, useState } from 'react'
-import { COOKIE_NAME } from '@/constants'
+import { APP_NAV_CONFIG, COOKIE_NAME } from '@/constants'
 import { SidebarItem } from '../layout/sidebar'
 import { AppTheme } from '@/types'
 import { BlurMask } from './mask'
+import { useParams } from 'next/navigation'
+import Link from 'next/link'
+import { VideoType } from 'gying'
+import { cn } from '@/lib/utils'
 
 function handleBlur() {
   const active = document.activeElement as HTMLElement
@@ -47,6 +47,7 @@ function HistoryButton() {
 
 function CollectionButton() {
   const [visible, setVisible] = useState(false)
+  const { type } = useParams<{ type: VideoType }>()
 
   return (
     <>
@@ -54,7 +55,23 @@ function CollectionButton() {
         {visible ? <IconCategory /> : <IconCategoryFilled />}
       </Button>
       <BlurMask visible={visible}>
-        <div>分类</div>
+        <div className="h-full w-full">
+          <div className="glass mx-2 mt-20 flex flex-col p-2">
+            {APP_NAV_CONFIG.map(item => (
+              <Link
+                key={item.type}
+                href={`/collection/${item.type}`}
+                className={cn(
+                  'hover:bg-accent-foreground/10 m-1 rounded-lg px-2 py-1',
+                  type === item.type && 'bg-accent-foreground/10 text-destructive'
+                )}
+                onClick={() => setVisible(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+          </div>
+        </div>
       </BlurMask>
     </>
   )
