@@ -3,10 +3,10 @@ packages:
   - packages/*
 
 catalog:
+  '@bprogress/next': latest
   '@commitlint/cli': latest
   '@commitlint/config-conventional': latest
   '@tabler/icons-react': latest
-  '@bprogress/next': latest
   '@tailwindcss/postcss': ^4
   '@types/jest': latest
   '@types/node': ^20

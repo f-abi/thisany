@@ -1,6 +1,6 @@
 'use client'
 
-import { HomeBanner, ListItemData } from 'gying'
+import { HomeBanner, ListItemData, VideoDetail } from 'gying'
 import Image from 'next/image'
 import { Skeleton } from '@/components/ui/skeleton'
 import { PropsWithChildren, useState } from 'react'
@@ -13,6 +13,25 @@ function ImageSkeleton({ isLoading, isError }: { isLoading: boolean; isError: bo
       {isError ? <IconPhotoX /> : <IconLoader2 className="animate-spin" />}
       <span className="text-xs">{isError ? '加载失败' : '加载中...'}</span>
     </Skeleton>
+  )
+}
+
+function MediaImage({ image, title }: VideoDetail) {
+  const [isLoading, setIsLoading] = useState(true)
+  const [isError, setIsError] = useState(false)
+  return (
+    <div className="relative aspect-2/3">
+      <ImageSkeleton isError={isError} isLoading={isLoading} />
+      <Image
+        src={image}
+        alt={title}
+        width={200}
+        height={300}
+        className="image"
+        onLoad={() => setIsLoading(false)}
+        onError={() => setIsError(true)}
+      />
+    </div>
   )
 }
 
@@ -64,4 +83,4 @@ function HomeBannerLinkImage({ item, children }: PropsWithChildren<{ item: HomeB
   )
 }
 
-export { MediaLinkImage, HomeBannerLinkImage }
+export { MediaImage, MediaLinkImage, HomeBannerLinkImage }
