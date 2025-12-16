@@ -1,6 +1,8 @@
 import { MediaImage } from '@/components/common/image'
-import { SeasonTabs } from '@/components/common/tabs'
+import { OnlinePlayTabs, SeasonTabs } from '@/components/common/tabs'
 import { Main } from '@/components/layout/main'
+import { Item, ItemActions, ItemContent, ItemMedia, ItemTitle } from '@/components/ui/item'
+import { IconProgressCheck, IconRefresh } from '@tabler/icons-react'
 import {
   DB_URL,
   getVideoDetail,
@@ -155,6 +157,33 @@ export default async function MediaDetailPage({
       {data.xle?.t && (
         <div className="card mx-2 mb-2 p-2 md:p-4 2xl:mx-0">
           <SeasonTabs xle={data.xle} type={type} />
+        </div>
+      )}
+      {data.status && (
+        <Item
+          variant="outline"
+          size="sm"
+          className="mx-2 mb-2 cursor-pointer bg-(--app-card-background) p-2 md:p-4 2xl:mx-0"
+        >
+          <ItemMedia>
+            <IconProgressCheck className="size-5" />
+          </ItemMedia>
+          <ItemContent>
+            <ItemTitle>
+              <div
+                className="[&_span]:text-destructive [&_span]:px-2 [&_span]:font-bold"
+                dangerouslySetInnerHTML={{ __html: data.status }}
+              />
+            </ItemTitle>
+          </ItemContent>
+          <ItemActions>
+            <IconRefresh className="size-4" />
+          </ItemActions>
+        </Item>
+      )}
+      {resource.playList.length > 0 && (
+        <div className="card mx-2 mb-2 p-2 md:p-4 2xl:mx-0">
+          <OnlinePlayTabs playList={resource.playList} />
         </div>
       )}
 

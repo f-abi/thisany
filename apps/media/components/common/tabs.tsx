@@ -1,15 +1,15 @@
 'use client'
 
-import { VideoType, VideoXle } from 'gying'
-import { Tabs, TabsList, TabsTrigger } from '../animate-ui/components/radix/tabs'
-import { useState, useRef, useEffect, useMemo } from 'react'
+import { Play, VideoResource, VideoType, VideoXle } from 'gying'
+import { Tabs, TabsContent, TabsList, TabsTrigger } from '../animate-ui/components/radix/tabs'
+import { useState, useRef, useEffect, useMemo, PropsWithChildren } from 'react'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
 import { Button } from '../ui/button'
+import { Item, ItemContent, ItemTitle } from '../ui/item'
 
-function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
-  const value = useMemo(() => xle.s.findIndex(_ => _ === '1').toString(), [xle])
+function AppTabsList({ children }: PropsWithChildren) {
   const scrollRef = useRef<HTMLDivElement>(null)
   const [showLeft, setShowLeft] = useState(false)
   const [showRight, setShowRight] = useState(false)
@@ -26,18 +26,27 @@ function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
     checkScroll()
     const container = scrollRef.current
 
+    const handleWheel = (e: WheelEvent) => {
+      if (e.deltaY !== 0) {
+        e.preventDefault()
+        container!.scrollLeft += e.deltaY
+      }
+    }
+
     if (container) {
       container.addEventListener('scroll', checkScroll)
+      container.addEventListener('wheel', handleWheel, { passive: false })
     }
     window.addEventListener('resize', checkScroll)
 
     return () => {
       if (container) {
         container.removeEventListener('scroll', checkScroll)
+        container.removeEventListener('wheel', handleWheel)
       }
       window.removeEventListener('resize', checkScroll)
     }
-  }, [xle])
+  }, [])
 
   useEffect(() => {
     const container = scrollRef.current
@@ -47,7 +56,7 @@ function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
       activeTab.scrollIntoView({ behavior: 'instant', block: 'nearest', inline: 'center' })
     }
     checkScroll()
-  }, [xle])
+  }, [])
 
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
@@ -64,53 +73,104 @@ function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
   return (
     <div className="relative w-full">
       <div
-        className={cn(
-          'from-background absolute top-0 bottom-0 left-0 z-10 flex items-center bg-linear-to-r to-transparent px-1 transition-opacity',
-          showLeft ? 'opacity-100' : 'pointer-events-none opacity-0'
-        )}
-      >
-        <Button
-          variant={'outline'}
-          size={'icon-lg'}
-          className="rounded-full"
-          onClick={() => scroll('left')}
-        >
-          <IconChevronLeft className="size-5" />
-        </Button>
-      </div>
-      <Tabs
-        value={value}
-        activationMode={'manual'}
         ref={scrollRef}
         className="w-full overflow-x-auto scroll-smooth rounded-lg transition-all [&::-webkit-scrollbar]:hidden"
       >
-        <TabsList className="h-10">
-          {xle.t.map((item, index) => (
-            <TabsTrigger key={index} value={index.toString()} asChild>
-              <Link href={`/media/${type}/${xle.u[index]}`} className="p-2 px-4">
-                {item}
-              </Link>
-            </TabsTrigger>
-          ))}
-        </TabsList>
-      </Tabs>
-      <div
-        className={cn(
-          'from-background absolute top-0 right-0 bottom-0 z-10 flex items-center bg-linear-to-l to-transparent px-1 transition-opacity',
-          showRight ? 'opacity-100' : 'pointer-events-none opacity-0'
-        )}
-      >
-        <Button
-          variant={'outline'}
-          size={'icon-lg'}
-          className="rounded-full"
-          onClick={() => scroll('right')}
+        <div
+          className={cn(
+            'absolute top-0 bottom-0 left-0 z-10 flex items-center bg-linear-to-r from-(--app-card-background) to-transparent transition-opacity',
+            showLeft ? 'opacity-100' : 'pointer-events-none opacity-0'
+          )}
         >
-          <IconChevronRight className="size-5" />
-        </Button>
+          <Button
+            variant="outline"
+            size="icon-lg"
+            className="rounded-full"
+            onClick={() => scroll('left')}
+          >
+            <IconChevronLeft />
+          </Button>
+        </div>
+        <TabsList className="h-10">{children}</TabsList>
+        <div
+          className={cn(
+            'absolute top-0 right-0 bottom-0 z-10 flex items-center bg-linear-to-l from-(--app-card-background) to-transparent transition-opacity',
+            showRight ? 'opacity-100' : 'pointer-events-none opacity-0'
+          )}
+        >
+          <Button
+            variant="outline"
+            size="icon-lg"
+            className="rounded-full"
+            onClick={() => scroll('right')}
+          >
+            <IconChevronRight />
+          </Button>
+        </div>
       </div>
     </div>
   )
 }
 
-export { SeasonTabs }
+function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
+  const value = useMemo(() => xle.s.findIndex(_ => _ === '1').toString(), [xle])
+  return (
+    <Tabs value={value} activationMode={'manual'}>
+      <AppTabsList>
+        {xle.t.map((item, index) => (
+          <TabsTrigger key={index} value={index.toString()} asChild>
+            <Link href={`/media/${type}/${xle.u[index]}`} className="p-2 px-4">
+              {item}
+            </Link>
+          </TabsTrigger>
+        ))}
+      </AppTabsList>
+    </Tabs>
+  )
+}
+
+function OnlinePlayTabs({ playList }: { playList: Array<Play> }) {
+  const [value, setValue] = useState(playList[0].i)
+
+  return (
+    <Tabs value={value} onValueChange={setValue}>
+      <AppTabsList>
+        {playList.map(item => (
+          <TabsTrigger key={item.i} value={item.i}>
+            {item.t}
+          </TabsTrigger>
+        ))}
+      </AppTabsList>
+      {playList.map(item => (
+        <TabsContent key={item.i} value={item.i} className="grid grid-cols-4 gap-2 xl:grid-cols-6">
+          {item.list.map((itemName, itemIndex) => (
+            <Link
+              href={'/'}
+              key={itemIndex}
+              className={cn(
+                'group bg-muted relative flex h-8 w-full items-center justify-center rounded-lg p-2'
+              )}
+            >
+              <div
+                className={cn(
+                  'group-hover:text-primary z-1 overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap transition-all',
+                  itemIndex === 0 ? 'text-primary' : 'text-muted-foreground'
+                )}
+              >
+                {itemName}
+              </div>
+              <div
+                className={cn(
+                  'group-hover:bg-background dark:group-hover:bg-input/30 dark:group-hover:border-input absolute inset-0 m-1 rounded-sm border border-transparent transition-all group-hover:shadow-sm',
+                  itemIndex === 0 && 'bg-background dark:bg-input/30 dark:border-input shadow-sm'
+                )}
+              />
+            </Link>
+          ))}
+        </TabsContent>
+      ))}
+    </Tabs>
+  )
+}
+
+export { SeasonTabs, OnlinePlayTabs }

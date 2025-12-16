@@ -6,6 +6,18 @@ import { Skeleton } from '@/components/ui/skeleton'
 import { PropsWithChildren, useState } from 'react'
 import { IconLoader2, IconPhotoX } from '@tabler/icons-react'
 
+function useImageStatus() {
+  const [loading, setLoading] = useState(true)
+  const [error, setError] = useState(false)
+
+  return {
+    loading,
+    error,
+    onLoad: () => setLoading(false),
+    onError: () => setError(true)
+  }
+}
+
 function ImageSkeleton({ isLoading, isError }: { isLoading: boolean; isError: boolean }) {
   if (!isLoading) return null
   return (
@@ -17,31 +29,30 @@ function ImageSkeleton({ isLoading, isError }: { isLoading: boolean; isError: bo
 }
 
 function MediaImage({ image, title }: VideoDetail) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  const { loading, error, onLoad, onError } = useImageStatus()
   return (
     <div className="relative aspect-2/3">
-      <ImageSkeleton isError={isError} isLoading={isLoading} />
+      <ImageSkeleton isError={error} isLoading={loading} />
       <Image
         src={image}
         alt={title}
         width={200}
         height={300}
         className="image"
-        onLoad={() => setIsLoading(false)}
-        onError={() => setIsError(true)}
+        onLoad={onLoad}
+        onError={onError}
+        loading={'eager'}
       />
     </div>
   )
 }
 
 function MediaLinkImage({ item }: { item: ListItemData }) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  const { loading, error, onLoad, onError } = useImageStatus()
   return (
     <div className="relative aspect-2/3">
       <div className="absolute inset-0 z-1 h-full w-full">
-        <ImageSkeleton isError={isError} isLoading={isLoading} />
+        <ImageSkeleton isError={error} isLoading={loading} />
         <div className={'image-tag absolute top-4 left-0 rounded-r-sm'}>
           {item.pf === 0 ? '暂无评分' : item.pf.toFixed(1)}
         </div>
@@ -55,19 +66,18 @@ function MediaLinkImage({ item }: { item: ListItemData }) {
         width={200}
         height={300}
         className="image"
-        onLoad={() => setIsLoading(false)}
-        onError={() => setIsError(true)}
+        onLoad={onLoad}
+        onError={onError}
       />
     </div>
   )
 }
 
 function HomeBannerLinkImage({ item, children }: PropsWithChildren<{ item: HomeBanner }>) {
-  const [isLoading, setIsLoading] = useState(true)
-  const [isError, setIsError] = useState(false)
+  const { loading, error, onLoad, onError } = useImageStatus()
   return (
     <div className="relative aspect-9/4 size-full">
-      <ImageSkeleton isError={isError} isLoading={isLoading} />
+      <ImageSkeleton isError={error} isLoading={loading} />
       <Image
         loading={'eager'}
         src={item.image}
@@ -75,8 +85,8 @@ function HomeBannerLinkImage({ item, children }: PropsWithChildren<{ item: HomeB
         width={900}
         height={400}
         className="image"
-        onLoad={() => setIsLoading(false)}
-        onError={() => setIsError(true)}
+        onLoad={onLoad}
+        onError={onError}
       />
       {children}
     </div>
