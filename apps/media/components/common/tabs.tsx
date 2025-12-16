@@ -1,13 +1,17 @@
 'use client'
 
-import { Play, VideoResource, VideoType, VideoXle } from 'gying'
-import { Tabs, TabsContent, TabsList, TabsTrigger } from '../animate-ui/components/radix/tabs'
+import { Play, VideoType, VideoXle } from 'gying'
+import {
+  Tabs,
+  TabsContent,
+  TabsList,
+  TabsTrigger
+} from '@/components/animate-ui/components/radix/tabs'
 import { useState, useRef, useEffect, useMemo, PropsWithChildren } from 'react'
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { cn } from '@/lib/utils'
 import Link from 'next/link'
-import { Button } from '../ui/button'
-import { Item, ItemContent, ItemTitle } from '../ui/item'
+import { Button } from '@/components/ui/button'
 
 function AppTabsList({ children }: PropsWithChildren) {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -61,7 +65,7 @@ function AppTabsList({ children }: PropsWithChildren) {
   const scroll = (direction: 'left' | 'right') => {
     if (scrollRef.current) {
       const container = scrollRef.current
-      const scrollAmount = container.clientWidth / 4
+      const scrollAmount = container.clientWidth / 2
 
       container.scrollBy({
         left: direction === 'left' ? -scrollAmount : scrollAmount,
@@ -71,7 +75,7 @@ function AppTabsList({ children }: PropsWithChildren) {
   }
 
   return (
-    <div className="relative w-full">
+    <div className="relative h-10 w-full">
       <div
         ref={scrollRef}
         className="w-full overflow-x-auto scroll-smooth rounded-lg transition-all [&::-webkit-scrollbar]:hidden"
@@ -115,17 +119,19 @@ function AppTabsList({ children }: PropsWithChildren) {
 function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
   const value = useMemo(() => xle.s.findIndex(_ => _ === '1').toString(), [xle])
   return (
-    <Tabs value={value} activationMode={'manual'}>
-      <AppTabsList>
-        {xle.t.map((item, index) => (
-          <TabsTrigger key={index} value={index.toString()} asChild>
-            <Link href={`/media/${type}/${xle.u[index]}`} className="p-2 px-4">
-              {item}
-            </Link>
-          </TabsTrigger>
-        ))}
-      </AppTabsList>
-    </Tabs>
+    <div className="card mx-2 mb-2 p-2 md:p-4 2xl:mx-0">
+      <Tabs value={value} activationMode={'manual'}>
+        <AppTabsList>
+          {xle.t.map((item, index) => (
+            <TabsTrigger key={index} value={index.toString()} asChild>
+              <Link href={`/media/${type}/${xle.u[index]}`} className="p-2 px-4">
+                {item}
+              </Link>
+            </TabsTrigger>
+          ))}
+        </AppTabsList>
+      </Tabs>
+    </div>
   )
 }
 
@@ -133,43 +139,49 @@ function OnlinePlayTabs({ playList }: { playList: Array<Play> }) {
   const [value, setValue] = useState(playList[0].i)
 
   return (
-    <Tabs value={value} onValueChange={setValue}>
-      <AppTabsList>
+    <div className="card mx-2 mb-2 p-2 md:p-4 2xl:mx-0">
+      <Tabs value={value} onValueChange={setValue}>
+        <AppTabsList>
+          {playList.map(item => (
+            <TabsTrigger key={item.i} value={item.i}>
+              {item.t}
+            </TabsTrigger>
+          ))}
+        </AppTabsList>
         {playList.map(item => (
-          <TabsTrigger key={item.i} value={item.i}>
-            {item.t}
-          </TabsTrigger>
-        ))}
-      </AppTabsList>
-      {playList.map(item => (
-        <TabsContent key={item.i} value={item.i} className="grid grid-cols-4 gap-2 xl:grid-cols-6">
-          {item.list.map((itemName, itemIndex) => (
-            <Link
-              href={'/'}
-              key={itemIndex}
-              className={cn(
-                'group bg-muted relative flex h-8 w-full items-center justify-center rounded-lg p-2'
-              )}
-            >
-              <div
+          <TabsContent
+            key={item.i}
+            value={item.i}
+            className="grid grid-cols-4 gap-2 xl:grid-cols-6"
+          >
+            {item.list.map((itemName, itemIndex) => (
+              <Link
+                href={'/'}
+                key={itemIndex}
                 className={cn(
-                  'group-hover:text-primary z-1 overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap transition-all',
-                  itemIndex === 0 ? 'text-primary' : 'text-muted-foreground'
+                  'group bg-muted relative flex h-8 w-full items-center justify-center rounded-lg p-2'
                 )}
               >
-                {itemName}
-              </div>
-              <div
-                className={cn(
-                  'group-hover:bg-background dark:group-hover:bg-input/30 dark:group-hover:border-input absolute inset-0 m-1 rounded-sm border border-transparent transition-all group-hover:shadow-sm',
-                  itemIndex === 0 && 'bg-background dark:bg-input/30 dark:border-input shadow-sm'
-                )}
-              />
-            </Link>
-          ))}
-        </TabsContent>
-      ))}
-    </Tabs>
+                <div
+                  className={cn(
+                    'group-hover:text-primary z-1 overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap transition-all',
+                    itemIndex === 0 ? 'text-primary' : 'text-muted-foreground'
+                  )}
+                >
+                  {itemName}
+                </div>
+                <div
+                  className={cn(
+                    'group-hover:bg-background dark:group-hover:bg-input/30 dark:group-hover:border-input absolute inset-0 m-1 rounded-sm border border-transparent transition-all group-hover:shadow-sm',
+                    itemIndex === 0 && 'bg-background dark:bg-input/30 dark:border-input shadow-sm'
+                  )}
+                />
+              </Link>
+            ))}
+          </TabsContent>
+        ))}
+      </Tabs>
+    </div>
   )
 }
 
