@@ -1,6 +1,9 @@
 'use client'
 
+import { IconLink, IconLock, IconReport, IconUser } from '@tabler/icons-react'
 import { VideoPanList } from 'gying'
+import Link from 'next/link'
+
 import {
   FileItem,
   Files,
@@ -9,8 +12,6 @@ import {
   FolderTrigger,
   SubFiles
 } from '@/components/animate-ui/components/radix/files'
-import Link from 'next/link'
-import { IconLink, IconLock, IconReport, IconUser } from '@tabler/icons-react'
 
 function PanList({ panList }: { panList: Array<VideoPanList> }) {
   return (

@@ -1,9 +1,12 @@
+import './globals.css'
+
 import type { Metadata, Viewport } from 'next'
 import { Dosis } from 'next/font/google'
-import './globals.css'
+
 import { Header } from '@/components/layout/header'
 import { Toaster } from '@/components/ui/sonner'
 import { getSidebarExpand, getTheme } from '@/lib/cookies'
+
 import Providers from './providers'
 
 const dosis = Dosis({

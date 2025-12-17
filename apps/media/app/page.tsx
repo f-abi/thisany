@@ -1,8 +1,9 @@
+import { IconDeviceTvOldFilled, IconGhost2Filled, IconVideoFilled } from '@tabler/icons-react'
 import { getHomeData } from 'gying'
 
 import { HomeBanner, HomeRecommend } from '@/components/common/home'
+import { Footer } from '@/components/layout/footer'
 import { Main } from '@/components/layout/main'
-import { IconDeviceTvOldFilled, IconGhost2Filled, IconVideoFilled } from '@tabler/icons-react'
 import { Sidebar, SidebarItem } from '@/components/layout/sidebar'
 import { getSidebarExpand } from '@/lib/cookies'
 
@@ -43,12 +44,13 @@ export default async function Home() {
           <SidebarItem key={item.key} Icon={item.Icon} name={item.name} />
         ))}
       </Sidebar>
-      <div className="sidebar-page flex flex-col transition-all">
+      <section className="sidebar-page flex flex-col transition-all">
         <HomeBanner data={data.banner} />
         {data.recommend.map(item => (
           <HomeRecommend key={item.type} item={item} />
         ))}
-      </div>
+        <Footer />
+      </section>
     </Main>
   )
 }

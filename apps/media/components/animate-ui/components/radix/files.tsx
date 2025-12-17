@@ -1,25 +1,25 @@
+import { IconFile, IconFolder, IconFolderOpen } from '@tabler/icons-react'
 import * as React from 'react'
-import { IconFolder, IconFolderOpen, IconFile } from '@tabler/icons-react'
 
 import {
+  File as FilePrimitive,
+  FileHighlight as FileHighlightPrimitive,
+  FileIcon as FileIconPrimitive,
+  FileLabel as FileLabelPrimitive,
+  type FileLabelProps as FileLabelPrimitiveProps,
+  type FileProps as FilePrimitiveProps,
   Files as FilesPrimitive,
   FilesHighlight as FilesHighlightPrimitive,
-  FolderItem as FolderItemPrimitive,
-  FolderHeader as FolderHeaderPrimitive,
-  FolderTrigger as FolderTriggerPrimitive,
-  FolderHighlight as FolderHighlightPrimitive,
-  Folder as FolderPrimitive,
-  FolderIcon as FolderIconPrimitive,
-  FileLabel as FileLabelPrimitive,
-  FolderContent as FolderContentPrimitive,
-  FileHighlight as FileHighlightPrimitive,
-  File as FilePrimitive,
-  FileIcon as FileIconPrimitive,
   type FilesProps as FilesPrimitiveProps,
-  type FolderItemProps as FolderItemPrimitiveProps,
+  Folder as FolderPrimitive,
+  FolderContent as FolderContentPrimitive,
   type FolderContentProps as FolderContentPrimitiveProps,
-  type FileProps as FilePrimitiveProps,
-  type FileLabelProps as FileLabelPrimitiveProps
+  FolderHeader as FolderHeaderPrimitive,
+  FolderHighlight as FolderHighlightPrimitive,
+  FolderIcon as FolderIconPrimitive,
+  FolderItem as FolderItemPrimitive,
+  type FolderItemProps as FolderItemPrimitiveProps,
+  FolderTrigger as FolderTriggerPrimitive
 } from '@/components/animate-ui/primitives/radix/files'
 import { cn } from '@/lib/utils'
 
@@ -147,16 +147,16 @@ function FileItem({
 }
 
 export {
-  Files,
-  FolderItem,
-  FolderTrigger,
-  FolderContent,
   FileItem,
-  SubFiles,
-  type FilesProps,
-  type FolderItemProps,
-  type FolderTriggerProps,
-  type FolderContentProps,
   type FileItemProps,
+  Files,
+  type FilesProps,
+  FolderContent,
+  type FolderContentProps,
+  FolderItem,
+  type FolderItemProps,
+  FolderTrigger,
+  type FolderTriggerProps,
+  SubFiles,
   type SubFilesProps
 }

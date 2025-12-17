@@ -1,7 +1,7 @@
 'use client'
 
+import { AnimatePresence, type HTMLMotionProps, motion } from 'motion/react'
 import * as React from 'react'
-import { AnimatePresence, motion, type HTMLMotionProps } from 'motion/react'
 
 import {
   Highlight,
@@ -11,18 +11,18 @@ import {
 } from '@/components/animate-ui/primitives/effects/highlight'
 import {
   Accordion,
-  AccordionItem,
-  AccordionHeader,
-  AccordionTrigger,
   AccordionContent,
-  type AccordionProps,
-  type AccordionItemProps,
+  type AccordionContentProps,
+  AccordionHeader,
   type AccordionHeaderProps,
-  type AccordionTriggerProps,
-  type AccordionContentProps
+  AccordionItem,
+  type AccordionItemProps,
+  type AccordionProps,
+  AccordionTrigger,
+  type AccordionTriggerProps
 } from '@/components/animate-ui/primitives/radix/accordion'
-import { getStrictContext } from '@/lib/get-strict-context'
 import { useControlledState } from '@/hooks/use-controlled-state'
+import { getStrictContext } from '@/lib/get-strict-context'
 
 type FilesContextType = {
   open: string[]
@@ -193,36 +193,36 @@ function FileLabel(props: FileLabelProps) {
 }
 
 export {
-  Files,
-  FilesHighlight,
-  FolderItem,
-  FolderHeader,
-  FolderTrigger,
-  FolderContent,
-  FileHighlight,
   File,
-  FileIcon,
-  FileLabel,
-  FolderHighlight,
-  Folder,
-  FolderIcon,
-  FolderLabel,
-  useFiles,
-  useFolder,
-  type FilesProps,
-  type FilesHighlightProps,
-  type FolderItemProps,
-  type FolderHeaderProps,
-  type FolderTriggerProps,
-  type FolderContentProps,
+  FileHighlight,
   type FileHighlightProps,
-  type FileProps,
+  FileIcon,
   type FileIconProps,
+  FileLabel,
   type FileLabelProps,
-  type FolderHighlightProps,
-  type FolderProps,
-  type FolderIconProps,
-  type FolderLabelProps,
+  type FileProps,
+  Files,
   type FilesContextType,
-  type FolderContextType
+  FilesHighlight,
+  type FilesHighlightProps,
+  type FilesProps,
+  Folder,
+  FolderContent,
+  type FolderContentProps,
+  type FolderContextType,
+  FolderHeader,
+  type FolderHeaderProps,
+  FolderHighlight,
+  type FolderHighlightProps,
+  FolderIcon,
+  type FolderIconProps,
+  FolderItem,
+  type FolderItemProps,
+  FolderLabel,
+  type FolderLabelProps,
+  type FolderProps,
+  FolderTrigger,
+  type FolderTriggerProps,
+  useFiles,
+  useFolder
 }

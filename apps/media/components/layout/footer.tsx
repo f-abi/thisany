@@ -2,7 +2,7 @@ import Link from 'next/link'
 
 export function Footer() {
   return (
-    <footer className="glass mb-2 flex flex-col p-2 xl:p-4">
+    <footer className="card mb-2 flex flex-col p-2 xl:p-4">
       <Link className="text-sm md:text-lg" href={'https://beian.miit.gov.cn/'}>
         闽ICP备2023007468号-1
       </Link>

@@ -1,14 +1,14 @@
 'use client'
 
-import * as React from 'react'
 import {
   type HTMLMotionProps,
   motion,
-  useMotionValue,
-  useSpring,
   type SpringOptions,
-  type Transition
+  type Transition,
+  useMotionValue,
+  useSpring
 } from 'motion/react'
+import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -153,4 +153,4 @@ function StarsBackground({
   )
 }
 
-export { StarLayer, StarsBackground, type StarLayerProps, type StarsBackgroundProps }
+export { StarLayer, type StarLayerProps, StarsBackground, type StarsBackgroundProps }

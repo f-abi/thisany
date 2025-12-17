@@ -1,4 +1,11 @@
-import { Main } from '@/components/layout/main'
+import {
+  IconBadgeHdFilled,
+  IconCalendarMonthFilled,
+  IconCategoryFilled,
+  IconLanguageHiragana,
+  IconMapPinFilled,
+  IconSortAscending2Filled
+} from '@tabler/icons-react'
 import {
   getCategoryListData,
   GYING_FILTER_GENRE,
@@ -12,15 +19,11 @@ import {
   VideoType
 } from 'gying'
 import { notFound } from 'next/navigation'
+
+import { MediaLinkList } from '@/components/common/media'
 import { PaginationBar } from '@/components/common/pagination-bar'
-import {
-  IconBadgeHdFilled,
-  IconCalendarMonthFilled,
-  IconCategoryFilled,
-  IconLanguageHiragana,
-  IconMapPinFilled,
-  IconSortAscending2Filled
-} from '@tabler/icons-react'
+import { Footer } from '@/components/layout/footer'
+import { Main } from '@/components/layout/main'
 import {
   Sidebar,
   SidebarItem,
@@ -28,7 +31,6 @@ import {
   SidebarItemMenuLink
 } from '@/components/layout/sidebar'
 import { getSidebarExpand } from '@/lib/cookies'
-import { MediaLinkList } from '@/components/common/link'
 
 type SearchParams = Record<string, string>
 
@@ -178,7 +180,7 @@ export default async function CollectionPage({
         type={type}
         expand={sidebarExpand}
       />
-      <div className="sidebar-page flex flex-col transition-all">
+      <section className="sidebar-page flex flex-col transition-all">
         <div className="card mx-2 mb-2 p-2 transition-all sm:ml-0 xl:p-4">
           <MediaLinkList data={data.items} />
           <PaginationBar
@@ -188,7 +190,8 @@ export default async function CollectionPage({
             searchParams={urlSearchParams}
           />
         </div>
-      </div>
+        <Footer />
+      </section>
     </Main>
   )
 }

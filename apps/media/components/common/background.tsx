@@ -1,12 +1,13 @@
 'use client'
 
 import { useEffect } from 'react'
+
+import { BubbleBackground } from '@/components/animate-ui/components/backgrounds/bubble'
+import { FireworksBackground } from '@/components/animate-ui/components/backgrounds/fireworks'
+import { GravityStarsBackground } from '@/components/animate-ui/components/backgrounds/gravity-stars'
+import { HexagonBackground } from '@/components/animate-ui/components/backgrounds/hexagon'
 import { HoleBackground } from '@/components/animate-ui/components/backgrounds/hole'
 import { StarsBackground } from '@/components/animate-ui/components/backgrounds/stars'
-import { HexagonBackground } from '@/components/animate-ui/components/backgrounds/hexagon'
-import { FireworksBackground } from '@/components/animate-ui/components/backgrounds/fireworks'
-import { BubbleBackground } from '@/components/animate-ui/components/backgrounds/bubble'
-import { GravityStarsBackground } from '@/components/animate-ui/components/backgrounds/gravity-stars'
 import { useAppStore } from '@/store/app'
 
 interface BackgroundProps {

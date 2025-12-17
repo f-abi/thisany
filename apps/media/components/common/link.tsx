@@ -1,5 +1,6 @@
 import { HomeBanner, ListItemData, tagToString } from 'gying'
 import Link from 'next/link'
+
 import { HomeBannerLinkImage, MediaLinkImage } from './image'
 
 function MediaLink({ item }: { item: ListItemData }) {
@@ -11,16 +12,6 @@ function MediaLink({ item }: { item: ListItemData }) {
         <span className="media-link_tag">{tagToString(item.tag)}</span>
       </div>
     </Link>
-  )
-}
-
-function MediaLinkList({ data }: { data: Array<ListItemData> }) {
-  return (
-    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-4 lg:grid-cols-6">
-      {data.map(item => (
-        <MediaLink item={item} key={item.id} />
-      ))}
-    </div>
   )
 }
 
@@ -43,4 +34,4 @@ function HomeBannerLink({ item }: { item: HomeBanner }) {
   )
 }
 
-export { MediaLink, MediaLinkList, HomeBannerLink }
+export { HomeBannerLink, MediaLink }

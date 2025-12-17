@@ -1,7 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { Label as RLabel } from 'radix-ui'
+import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 

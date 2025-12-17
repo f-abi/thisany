@@ -1,12 +1,12 @@
-import type { AppTheme } from '@/types'
 import {
-  ThemeButton,
-  SearchButton,
   CollectionButton,
-  HistoryButton
+  HistoryButton,
+  SearchButton,
+  ThemeButton
 } from '@/components/common/button'
 import { Logo } from '@/components/common/logo'
 import { Nav } from '@/components/layout/nav'
+import type { AppTheme } from '@/types'
 
 interface Props {
   theme: AppTheme

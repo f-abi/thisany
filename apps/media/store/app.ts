@@ -1,8 +1,9 @@
 'use client'
 
-import { AppBackground } from '@/types'
 import { create } from 'zustand'
 import { persist } from 'zustand/middleware'
+
+import { AppBackground } from '@/types'
 
 export interface AppState {
   background: AppBackground

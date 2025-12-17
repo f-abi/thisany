@@ -1,14 +1,16 @@
 'use client'
 
-import Autoplay from 'embla-carousel-autoplay'
-import { HomeRecommend as HomeRecommendType, getHomeRecommendData } from 'gying'
-import { useState, useTransition } from 'react'
-import { Button } from '../ui/button'
-import { toast } from 'sonner'
-import { HomeBannerLink, MediaLinkList } from './link'
-import { Carousel, CarouselContent, CarouselItem } from '../ui/carousel'
-import { HomeBanner as GYHomeBanner } from 'gying'
 import { IconLoader2, IconReload } from '@tabler/icons-react'
+import Autoplay from 'embla-carousel-autoplay'
+import { getHomeRecommendData, HomeRecommend as HomeRecommendType } from 'gying'
+import { HomeBanner as GYHomeBanner } from 'gying'
+import { useState, useTransition } from 'react'
+import { toast } from 'sonner'
+
+import { HomeBannerLink } from '@/components/common/link'
+import { MediaLinkList } from '@/components/common/media'
+import { Button } from '@/components/ui/button'
+import { Carousel, CarouselContent, CarouselItem } from '@/components/ui/carousel'
 
 function HomeBanner({ data }: { data: Array<GYHomeBanner> }) {
   return (

@@ -1,7 +1,7 @@
 'use client'
 
-import * as React from 'react'
 import { AnimatePresence, motion, type Transition } from 'motion/react'
+import * as React from 'react'
 
 import { cn } from '@/lib/utils'
 
@@ -606,4 +606,4 @@ function HighlightItem<T extends React.ElementType>({
   )
 }
 
-export { Highlight, HighlightItem, useHighlight, type HighlightProps, type HighlightItemProps }
+export { Highlight, HighlightItem, type HighlightItemProps, type HighlightProps, useHighlight }

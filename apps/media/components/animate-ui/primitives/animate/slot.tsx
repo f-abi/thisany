@@ -1,8 +1,9 @@
 /* eslint-disable react-hooks/static-components */
 'use client'
 
+import { type HTMLMotionProps, isMotionComponent, motion } from 'motion/react'
 import * as React from 'react'
-import { motion, isMotionComponent, type HTMLMotionProps } from 'motion/react'
+
 import { cn } from '@/lib/utils'
 
 type AnyProps = Record<string, unknown>
@@ -75,4 +76,4 @@ function Slot<T extends HTMLElement = HTMLElement>({ children, ref, ...props }: 
   return <Base {...mergedProps} ref={mergeRefs(childRef as React.Ref<T>, ref)} />
 }
 
-export { Slot, type SlotProps, type WithAsChild, type DOMMotionProps, type AnyProps }
+export { type AnyProps, type DOMMotionProps, Slot, type SlotProps, type WithAsChild }

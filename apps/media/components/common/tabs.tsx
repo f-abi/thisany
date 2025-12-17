@@ -1,17 +1,18 @@
 'use client'
 
+import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { Play, VideoType, VideoXle } from 'gying'
+import Link from 'next/link'
+import { PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react'
+
 import {
   Tabs,
   TabsContent,
   TabsList,
   TabsTrigger
 } from '@/components/animate-ui/components/radix/tabs'
-import { useState, useRef, useEffect, useMemo, PropsWithChildren } from 'react'
-import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
-import { cn } from '@/lib/utils'
-import Link from 'next/link'
 import { Button } from '@/components/ui/button'
+import { cn } from '@/lib/utils'
 
 function AppTabsList({ children }: PropsWithChildren) {
   const scrollRef = useRef<HTMLDivElement>(null)
@@ -185,4 +186,4 @@ function OnlinePlayTabs({ playList }: { playList: Array<Play> }) {
   )
 }
 
-export { SeasonTabs, OnlinePlayTabs }
+export { OnlinePlayTabs, SeasonTabs }

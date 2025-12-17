@@ -1,8 +1,9 @@
 'use client'
 
+import { usePathname } from 'next/navigation'
+
 import { APP_NAV_CONFIG } from '@/constants'
 import { cn } from '@/lib/utils'
-import { usePathname } from 'next/navigation'
 
 export function NavLinkBox({ type, name }: (typeof APP_NAV_CONFIG)[number]) {
   const pathname = usePathname()

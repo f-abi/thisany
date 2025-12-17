@@ -1,6 +1,5 @@
 'use client'
 
-import { Button } from '@/components/ui/button'
 import {
   IconBackground,
   IconBrightness,
@@ -13,15 +12,18 @@ import {
   IconLayoutSidebarLeftExpandFilled,
   IconSearch
 } from '@tabler/icons-react'
-import { useEffect, useState } from 'react'
-import { APP_NAV_CONFIG, COOKIE_NAME } from '@/constants'
-import { SidebarItem } from '../layout/sidebar'
-import { AppTheme } from '@/types'
-import { BlurMask } from './mask'
-import { useParams } from 'next/navigation'
-import Link from 'next/link'
 import { VideoType } from 'gying'
+import Link from 'next/link'
+import { useParams } from 'next/navigation'
+import { useEffect, useState } from 'react'
+
+import { Button } from '@/components/ui/button'
+import { APP_NAV_CONFIG, COOKIE_NAME } from '@/constants'
 import { cn } from '@/lib/utils'
+import { AppTheme } from '@/types'
+
+import { SidebarItem } from '../layout/sidebar'
+import { BlurMask } from './mask'
 
 function handleBlur() {
   const active = document.activeElement as HTMLElement
@@ -165,10 +167,10 @@ function SidebarBottomButton({ expand: init }: { expand: boolean }) {
 }
 
 export {
-  SearchButton,
-  SidebarBottomButton,
-  ThemeButton,
-  SettingButton,
   CollectionButton,
-  HistoryButton
+  HistoryButton,
+  SearchButton,
+  SettingButton,
+  SidebarBottomButton,
+  ThemeButton
 }

@@ -1,8 +1,9 @@
 'use server'
 
+import { cookies } from 'next/headers'
+
 import { COOKIE_NAME } from '@/constants'
 import { AppTheme } from '@/types'
-import { cookies } from 'next/headers'
 
 export const getTheme = async () => {
   const theme = (await cookies()).get(COOKIE_NAME.THEME)?.value

@@ -1,11 +1,11 @@
 'use client'
 
-import * as React from 'react'
+import { AnimatePresence, type HTMLMotionProps, motion } from 'motion/react'
 import { RadioGroup as RadioGroupPrimitive } from 'radix-ui'
-import { AnimatePresence, motion, type HTMLMotionProps } from 'motion/react'
+import * as React from 'react'
 
-import { getStrictContext } from '@/lib/get-strict-context'
 import { useControlledState } from '@/hooks/use-controlled-state'
+import { getStrictContext } from '@/lib/get-strict-context'
 
 type RadioGroupContextType = {
   value: string
@@ -97,13 +97,13 @@ function RadioGroupItem({ value: valueProps, disabled, required, ...props }: Rad
 
 export {
   RadioGroup,
-  RadioGroupItem,
-  RadioGroupIndicator,
-  useRadioGroup,
-  useRadioGroupItem,
-  type RadioGroupProps,
-  type RadioGroupItemProps,
-  type RadioGroupIndicatorProps,
   type RadioGroupContextType,
-  type RadioGroupItemContextType
+  RadioGroupIndicator,
+  type RadioGroupIndicatorProps,
+  RadioGroupItem,
+  type RadioGroupItemContextType,
+  type RadioGroupItemProps,
+  type RadioGroupProps,
+  useRadioGroup,
+  useRadioGroupItem
 }

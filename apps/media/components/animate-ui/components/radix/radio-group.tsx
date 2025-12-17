@@ -1,12 +1,12 @@
-import * as React from 'react'
 import { CircleIcon } from 'lucide-react'
+import * as React from 'react'
 
 import {
   RadioGroup as RadioGroupPrimitive,
-  RadioGroupItem as RadioGroupItemPrimitive,
   RadioGroupIndicator as RadioGroupIndicatorPrimitive,
-  type RadioGroupProps as RadioGroupPrimitiveProps,
-  type RadioGroupItemProps as RadioGroupItemPrimitiveProps
+  RadioGroupItem as RadioGroupItemPrimitive,
+  type RadioGroupItemProps as RadioGroupItemPrimitiveProps,
+  type RadioGroupProps as RadioGroupPrimitiveProps
 } from '@/components/animate-ui/primitives/radix/radio-group'
 import { cn } from '@/lib/utils'
 
@@ -34,4 +34,4 @@ function RadioGroupItem({ className, ...props }: RadioGroupItemProps) {
   )
 }
 
-export { RadioGroup, RadioGroupItem, type RadioGroupProps, type RadioGroupItemProps }
+export { RadioGroup, RadioGroupItem, type RadioGroupItemProps, type RadioGroupProps }
