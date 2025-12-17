@@ -3,6 +3,7 @@
 import { IconChevronLeft, IconChevronRight } from '@tabler/icons-react'
 import { Play, VideoType, VideoXle } from 'gying'
 import Link from 'next/link'
+import { useParams } from 'next/navigation'
 import { PropsWithChildren, useEffect, useMemo, useRef, useState } from 'react'
 
 import {
@@ -137,7 +138,13 @@ function SeasonTabs({ xle, type }: { xle: VideoXle; type: VideoType }) {
 }
 
 function OnlinePlayTabs({ playList }: { playList: Array<Play> }) {
-  const [value, setValue] = useState(playList[0].i)
+  const { type, id, pid, episodes } = useParams<{
+    type: VideoType
+    id: string
+    pid?: string
+    episodes?: string
+  }>()
+  const [value, setValue] = useState(pid ?? playList[0].i)
 
   return (
     <div className="card mx-2 mb-2 p-2 md:p-4 2xl:mx-0">
@@ -155,30 +162,33 @@ function OnlinePlayTabs({ playList }: { playList: Array<Play> }) {
             value={item.i}
             className="grid grid-cols-4 gap-2 xl:grid-cols-6"
           >
-            {item.list.map((itemName, itemIndex) => (
-              <Link
-                href={'/'}
-                key={itemIndex}
-                className={cn(
-                  'group bg-muted relative flex h-8 w-full items-center justify-center rounded-lg p-2'
-                )}
-              >
-                <div
+            {item.list.map((itemName, itemIndex) => {
+              const active = item.i === pid && itemIndex + 1 === Number(episodes)
+              return (
+                <Link
+                  href={`/media/${type}/${id}/${item.i}/${itemIndex + 1}`}
+                  key={itemIndex}
                   className={cn(
-                    'group-hover:text-primary z-1 overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap transition-all',
-                    itemIndex === 0 ? 'text-primary' : 'text-muted-foreground'
+                    'group bg-muted relative flex h-8 w-full items-center justify-center rounded-lg p-2'
                   )}
                 >
-                  {itemName}
-                </div>
-                <div
-                  className={cn(
-                    'group-hover:bg-background dark:group-hover:bg-input/30 dark:group-hover:border-input absolute inset-0 m-1 rounded-sm border border-transparent transition-all group-hover:shadow-sm',
-                    itemIndex === 0 && 'bg-background dark:bg-input/30 dark:border-input shadow-sm'
-                  )}
-                />
-              </Link>
-            ))}
+                  <div
+                    className={cn(
+                      'group-hover:text-primary z-1 overflow-hidden text-center text-sm text-ellipsis whitespace-nowrap transition-all',
+                      active ? 'text-primary' : 'text-muted-foreground'
+                    )}
+                  >
+                    {itemName}
+                  </div>
+                  <div
+                    className={cn(
+                      'group-hover:bg-background dark:group-hover:bg-input/30 dark:group-hover:border-input absolute inset-0 m-1 rounded-sm border border-transparent transition-all group-hover:shadow-sm',
+                      active && 'bg-background dark:bg-input/30 dark:border-input shadow-sm'
+                    )}
+                  />
+                </Link>
+              )
+            })}
           </TabsContent>
         ))}
       </Tabs>
