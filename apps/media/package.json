@@ -24,7 +24,9 @@
     "react-dom": "catalog:",
     "sonner": "catalog:",
     "tailwind-merge": "catalog:",
-    "zustand": "catalog:"
+    "zustand": "catalog:",
+    "xgplayer": "catalog:",
+    "xgplayer-hls": "catalog:"
   },
   "devDependencies": {
     "@tailwindcss/postcss": "catalog:",

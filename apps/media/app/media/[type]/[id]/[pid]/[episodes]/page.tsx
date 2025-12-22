@@ -1,5 +1,7 @@
 import { getVideoPlayer, VideoType } from 'gying'
 
+import { MediaPlayer } from '@/components/common/player'
+
 export default async function MediaDetailPage({
   params
 }: {
@@ -20,8 +22,8 @@ export default async function MediaDetailPage({
   })
 
   return (
-    <>
-      <div>{player.url}</div>
-    </>
+    <div className="card mx-2 mb-2 p-2 md:p-4 2xl:mx-0">
+      <MediaPlayer src={player.url} title={player.title} />
+    </div>
   )
 }
