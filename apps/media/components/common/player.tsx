@@ -4,9 +4,9 @@ import 'xgplayer/dist/index.min.css'
 
 import { useEffect, useRef } from 'react'
 import Player, { Events, IPluginOptions, Plugin } from 'xgplayer'
-import HlsPlugin from 'xgplayer-hls'
+import HlsPlugin, { EVENT } from 'xgplayer-hls'
 
-import { useAppStore } from '@/store/app'
+import { usePlayerStore } from '@/store/player'
 
 const { POSITIONS } = Plugin
 
@@ -36,14 +36,14 @@ function MediaPlayer({
   title: string
   endedCallback?: () => void
 }) {
-  const { setPlayerHistory } = useAppStore()
+  const { progress, setProgress } = usePlayerStore()
 
   // 播放器实例
   const player = useRef<Player | null>(null)
 
-  useEffect(() => {
-    if (!src) return
-
+  function init() {
+    console.log(progress)
+    console.log(progress[src])
     player.current = new Player({
       id: 'thisany',
       lang: 'zh-cn',
@@ -51,40 +51,45 @@ function MediaPlayer({
       autoplay: true, // 自动播放
       isLive: false, // live流
       url: src, // hls 流地址
-      // startTime: timeRecording.value[`${src}`] ?? 0, // 播放开始时间
+      startTime: progress[`${src}`] ?? 0, // 播放开始时间
       fluid: true, // 是否启用流式布局，启用流式布局时根据width、height计算播放器宽高比，若width和height不是Number类型，默认使用16:9比例
       download: false, // 显示下载按钮
       plugins: [HlsPlugin, TitlePlugin], // 插件
       hls: {
-        preloadTime: 3600 // 默认值
-        // maxBufferLength: 3600, // 缓存时长
-        // maxMaxBufferLength: 3600, // 最大缓存时长
-        // maxBufferSize: 500 * 1024 * 1024 // 缓存太小会导致反复请求
+        startTime: progress[`${src}`] ?? 0,
+        preloadTime: 5 * 60,
+        bufferBehind: 1
       },
       TitlePlugin: {
         title
       }
     })
     player.current.on(Events.TIME_UPDATE, (data: { currentTime: number }) => {
-      console.log(player.current?.plugins.hls.core.speedInfo())
-      setPlayerHistory({
-        [src]: data.currentTime
+      setProgress({
+        ...progress,
+        [`${src}`]: data.currentTime
       })
     })
     player.current.on(Events.ENDED, () => {
-      setPlayerHistory({
-        [src]: 0
+      setProgress({
+        ...progress,
+        [`${src}`]: 0
       })
       endedCallback?.()
     })
+  }
 
+  useEffect(() => {
+    usePlayerStore.persist.rehydrate()
+    init()
     return () => {
       if (player.current) {
         player.current.destroy()
         player.current = null
       }
     }
-  }, [src, title, endedCallback, setPlayerHistory])
+    // eslint-disable-next-line react-hooks/exhaustive-deps
+  }, [])
   return <div id="thisany" />
 }
 
