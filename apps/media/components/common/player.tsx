@@ -2,9 +2,11 @@
 
 import 'xgplayer/dist/index.min.css'
 
-import { useEffect, useRef } from 'react'
+import { Player as GyPlayer } from 'gying'
+import { useRouter, useSearchParams } from 'next/navigation'
+import { useEffect, useRef, useState } from 'react'
 import Player, { Events, IPluginOptions, Plugin } from 'xgplayer'
-import HlsPlugin, { EVENT } from 'xgplayer-hls'
+import HlsPlugin from 'xgplayer-hls'
 
 import { usePlayerStore } from '@/store/player'
 
@@ -27,61 +29,73 @@ class TitlePlugin extends Plugin {
   }
 }
 
-function MediaPlayer({
-  src,
-  title,
-  endedCallback
-}: {
-  src: string
-  title: string
-  endedCallback?: () => void
-}) {
-  const { progress, setProgress } = usePlayerStore()
+function MediaPlayer({ url, title, dir, bid, select, playlist, page }: GyPlayer) {
+  const setProgress = usePlayerStore(state => state.setProgress)
 
-  // 播放器实例
+  const router = useRouter()
+
+  const isFull = useSearchParams().get('full')
+  const [fullScreen, setFullScreen] = useState<boolean>(false)
+
   const player = useRef<Player | null>(null)
 
-  function init() {
-    console.log(progress)
-    console.log(progress[src])
+  useEffect(() => {
+    // 水合 播放器存储
+    usePlayerStore.persist.rehydrate()
+
+    // 初始化进度条位置
+    const progress = usePlayerStore.getState().progress
+
+    // 初始化播放器实例
     player.current = new Player({
       id: 'thisany',
       lang: 'zh-cn',
       pip: true, // 画中画
       autoplay: true, // 自动播放
       isLive: false, // live流
-      url: src, // hls 流地址
-      startTime: progress[`${src}`] ?? 0, // 播放开始时间
+      url, // hls 流地址
+      startTime: progress[`${url}`] ?? 0, // 播放开始时间
       fluid: true, // 是否启用流式布局，启用流式布局时根据width、height计算播放器宽高比，若width和height不是Number类型，默认使用16:9比例
       download: false, // 显示下载按钮
       plugins: [HlsPlugin, TitlePlugin], // 插件
       hls: {
-        startTime: progress[`${src}`] ?? 0,
-        preloadTime: 5 * 60,
-        bufferBehind: 1
+        preloadTime: 5 * 60
       },
       TitlePlugin: {
         title
       }
     })
-    player.current.on(Events.TIME_UPDATE, (data: { currentTime: number }) => {
-      setProgress({
-        ...progress,
-        [`${src}`]: data.currentTime
-      })
-    })
-    player.current.on(Events.ENDED, () => {
-      setProgress({
-        ...progress,
-        [`${src}`]: 0
-      })
-      endedCallback?.()
-    })
-  }
 
-  useEffect(() => {
-    usePlayerStore.persist.rehydrate()
-    init()
+    // 监听记录播放时间
+    player.current.on(Events.TIME_UPDATE, (data: { currentTime: number }) => {
+      const progress = usePlayerStore.getState().progress
+      setProgress({
+        ...progress,
+        [`${url}`]: data.currentTime
+      })
+    })
+    // 监听播放完毕
+    player.current.on(Events.ENDED, () => {
+      const progress = usePlayerStore.getState().progress
+      setProgress({
+        ...progress,
+        [`${url}`]: 0
+      })
+      // 判断是不是最后一集
+      if (!(page + 2 > playlist[select].list.length)) {
+        // 如果不是 则自动跳转下一集
+        router.push(
+          `/media/${dir}/${bid}/${playlist[select].i}/${page + 2}?full=${fullScreen ? 'Y' : 'D'}`
+        )
+      }
+    })
+    // 监听是否全屏
+    player.current.on(Events.FULLSCREEN_CHANGE, isFullscreen => setFullScreen(isFullscreen))
+
+    // 启动播放
+    player.current.start()
+    // 设置全屏
+    if (isFull === 'Y') player.current.getFullscreen()
     return () => {
       if (player.current) {
         player.current.destroy()
@@ -90,7 +104,11 @@ function MediaPlayer({
     }
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  return <div id="thisany" />
+  return (
+    <div className="aspect-video overflow-hidden rounded-lg">
+      <div id="thisany" />
+    </div>
+  )
 }
 
 export { MediaPlayer }
