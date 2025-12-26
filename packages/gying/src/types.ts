@@ -333,3 +333,52 @@ export interface VideoResource {
   playList: Array<Play>
   isCaptcha: boolean
 }
+
+export interface Search {
+  inlist: {
+    zhuyan: Array<string>
+    info: Array<string>
+    pf: {
+      db: {
+        s: Array<number>
+      }
+      im: {
+        s: Array<number>
+      }
+    }
+    title: Array<string>
+    name: Array<string>
+    ename: Array<string>
+    year: Array<number>
+    d: Array<VideoType>
+    i: Array<string>
+  }
+  page: {
+    pages: number
+    curr: number
+    set: number
+  }
+}
+
+/** 搜索数据 */
+export interface VideoSearchData {
+  title: string
+  id: string
+  type: VideoType
+  zhuyan: string
+  info: string
+  name: string
+  ename: string
+  db: number
+  im: number
+  year: number
+  image: string
+}
+
+/** 搜索结果列表 */
+export interface VideoSearch {
+  pageIndex: number
+  pageSize: 25
+  pageTotal: number
+  items: Array<VideoSearchData>
+}

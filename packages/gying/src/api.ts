@@ -16,7 +16,9 @@ import {
   Downurl,
   VideoResource,
   Player,
-  FetchOptions
+  FetchOptions,
+  VideoSearch,
+  Search
 } from './types'
 import { calcPlayList } from './utils'
 
@@ -369,5 +371,53 @@ export async function getVideoPlayer({
   return {
     ...data,
     playlist
+  }
+}
+
+export async function searchVideo({
+  pageIndex,
+  keyword,
+  options
+}: {
+  pageIndex: number
+  keyword: string
+  options?: FetchOptions
+}): Promise<VideoSearch> {
+  const cookie = await getCookies()
+
+  const response = await fetch(
+    `${GYING_API}/res/s/1---${pageIndex}/${encodeURIComponent(keyword)}`,
+    {
+      ...options,
+      headers: {
+        'User-Agent': USER_AGENT,
+        cookie,
+        Referer: `${GYING_API}`,
+        ...options?.headers
+      }
+    }
+  )
+
+  const dataRaw = (await response.json()) as Search
+
+  const list = dataRaw.inlist.title.map((title, index) => ({
+    title,
+    id: dataRaw.inlist.i[index],
+    type: dataRaw.inlist.d[index],
+    zhuyan: dataRaw.inlist.zhuyan[index],
+    info: dataRaw.inlist.info[index],
+    name: dataRaw.inlist.name[index],
+    ename: dataRaw.inlist.ename[index],
+    db: dataRaw.inlist.pf.db.s[index],
+    im: dataRaw.inlist.pf.im.s[index],
+    year: dataRaw.inlist.year[index],
+    image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${dataRaw.inlist.d[index]}/${dataRaw.inlist.i[index]}${IMAGE_FORMAT}`
+  }))
+
+  return {
+    pageIndex,
+    pageSize: 25,
+    pageTotal: dataRaw.page.pages,
+    items: list
   }
 }
