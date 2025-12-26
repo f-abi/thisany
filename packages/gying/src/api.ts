@@ -400,19 +400,21 @@ export async function searchVideo({
 
   const dataRaw = (await response.json()) as Search
 
-  const list = dataRaw.inlist.title.map((title, index) => ({
-    title,
-    id: dataRaw.inlist.i[index],
-    type: dataRaw.inlist.d[index],
-    zhuyan: dataRaw.inlist.zhuyan[index],
-    info: dataRaw.inlist.info[index],
-    name: dataRaw.inlist.name[index],
-    ename: dataRaw.inlist.ename[index],
-    db: dataRaw.inlist.pf.db.s[index],
-    im: dataRaw.inlist.pf.im.s[index],
-    year: dataRaw.inlist.year[index],
-    image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${dataRaw.inlist.d[index]}/${dataRaw.inlist.i[index]}${IMAGE_FORMAT}`
-  }))
+  const list = dataRaw.inlist
+    ? dataRaw.inlist?.title.map((title, index) => ({
+        title,
+        id: dataRaw.inlist!.i[index],
+        type: dataRaw.inlist!.d[index],
+        zhuyan: dataRaw.inlist!.zhuyan[index],
+        info: dataRaw.inlist!.info[index],
+        name: dataRaw.inlist!.name[index],
+        ename: dataRaw.inlist!.ename[index],
+        db: dataRaw.inlist!.pf.db.s[index],
+        im: dataRaw.inlist!.pf.im.s[index],
+        year: dataRaw.inlist!.year[index],
+        image: `${IMAGE_SERVICE}${IMAGE_CDN}/img/${dataRaw.inlist!.d[index]}/${dataRaw.inlist!.i[index]}${IMAGE_FORMAT}`
+      }))
+    : []
 
   return {
     pageIndex,

@@ -13,10 +13,11 @@ import {
   IconLoader2,
   IconSearch
 } from '@tabler/icons-react'
-import { VideoType } from 'gying'
+import { searchVideo, VideoSearch, VideoSearchData, VideoType } from 'gying'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useEffect, useRef, useState, useTransition } from 'react'
+import { ChangeEvent, useEffect, useMemo, useRef, useState, useTransition } from 'react'
+import { toast } from 'sonner'
 
 import { Button } from '@/components/ui/button'
 import { APP_NAV_CONFIG, COOKIE_NAME } from '@/constants'
@@ -97,14 +98,63 @@ function SettingButton() {
 }
 
 function SearchButton() {
-  const [visible, setVisible] = useState(false)
-  const [data, setData] = useState()
-  const [value, setValue] = useState<string>('')
-  const [isPending, startTransition] = useTransition()
-
   const inputRef = useRef<HTMLInputElement>(null)
 
-  function handleSearch() {}
+  const [visible, setVisible] = useState(false)
+  const [data, setData] = useState<Array<VideoSearch>>([])
+  const [pageIndex, setPageIndex] = useState(1)
+  const [keyword, setKeyword] = useState<string>('')
+  const [error, setError] = useState<boolean>(false)
+  const [isPending, startTransition] = useTransition()
+
+  const listData = useMemo(() => data.flatMap(_ => _.items), [data])
+
+  const hasMore = useMemo(
+    () => (data.length > 1 ? data[data.length - 1].pageTotal > pageIndex : false),
+    [data, pageIndex]
+  )
+
+  const handleSearch = () => {
+    if (keyword.trim().length === 0) {
+      handleReset()
+      return
+    } else
+      startTransition(async () => {
+        try {
+          setError(false)
+          const result = await searchVideo({
+            pageIndex,
+            keyword,
+            options: {
+              next: {
+                revalidate: 60000
+              }
+            }
+          })
+          setData([...data, result])
+        } catch {
+          toast.error('加载失败请重试')
+          setError(true)
+          setPageIndex(pageIndex === 1 ? pageIndex : pageIndex - 1)
+        }
+      })
+  }
+
+  const handleLoadMore = () => {
+    setPageIndex(pageIndex + 1)
+    handleSearch()
+  }
+
+  const handleReset = () => {
+    setPageIndex(1)
+    setData([])
+  }
+
+  const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
+    setKeyword(event.target.value)
+    handleReset()
+    handleSearch()
+  }
 
   useEffect(() => {
     if (visible) inputRef.current?.focus()
@@ -124,32 +174,34 @@ function SearchButton() {
                 type="search"
                 placeholder="输入搜索内容"
                 className="text-sm"
-                value={value}
-                onChange={e => setValue(e.target.value)}
+                value={keyword}
+                onChange={handleChange}
               />
               <InputGroupAddon>
                 <IconSearch />
               </InputGroupAddon>
               <InputGroupAddon align="inline-end">
-                <IconLoader2 className="animate-spin" />
+                {isPending && <IconLoader2 className="animate-spin" />}
               </InputGroupAddon>
             </InputGroup>
           </div>
-          <div className="glass mx-2 mt-2 flex max-h-40 flex-col overflow-y-auto p-2">
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
-            <p>126465</p>
+          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto">
+            {listData.map(item => (
+              <Link
+                key={item.id}
+                href={`/media/${item.type}/${item.id}`}
+                onClick={() => setVisible(false)}
+                className="hover:bg-accent-foreground/10 m-1 rounded-lg p-2"
+              >
+                {item.title}
+              </Link>
+            ))}
+            {isPending && (
+              <div className="p-4">
+                <IconLoader2 className="animate-spin" />
+              </div>
+            )}
+            {!isPending && hasMore && <Button onClick={handleLoadMore}>加载更多</Button>}
           </div>
         </div>
       </BlurMask>

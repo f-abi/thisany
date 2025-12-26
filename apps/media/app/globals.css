@@ -173,4 +173,9 @@
   .image-skeleton {
     @apply absolute top-0 z-1 flex h-full w-full flex-col items-center justify-center gap-2;
   }
+
+  .scroll-box {
+    scrollbar-color: var(--primary) transparent;
+    scrollbar-width: thin;
+  }
 }

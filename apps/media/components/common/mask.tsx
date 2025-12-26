@@ -76,7 +76,7 @@ function BlurMask({ children, visible, className, onClick }: PropsWithChildren<M
             className={cn('fixed inset-0 z-90 overflow-y-scroll backdrop-blur-sm', className)}
             onClick={onClick}
           >
-            <div className="flex min-h-full w-full items-center justify-center p-4">{children}</div>
+            <div className="flex w-full items-center justify-center">{children}</div>
           </motion.div>
         </>
       )}

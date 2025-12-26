@@ -335,7 +335,7 @@ export interface VideoResource {
 }
 
 export interface Search {
-  inlist: {
+  inlist?: {
     zhuyan: Array<string>
     info: Array<string>
     pf: {
