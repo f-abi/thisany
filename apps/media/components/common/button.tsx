@@ -10,12 +10,13 @@ import {
   IconClockFilled,
   IconLayoutSidebarLeftCollapseFilled,
   IconLayoutSidebarLeftExpandFilled,
+  IconLoader2,
   IconSearch
 } from '@tabler/icons-react'
 import { VideoType } from 'gying'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
-import { useEffect, useState } from 'react'
+import { useEffect, useRef, useState, useTransition } from 'react'
 
 import { Button } from '@/components/ui/button'
 import { APP_NAV_CONFIG, COOKIE_NAME } from '@/constants'
@@ -23,6 +24,7 @@ import { cn } from '@/lib/utils'
 import { AppTheme } from '@/types'
 
 import { SidebarItem } from '../layout/sidebar'
+import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
 import { BlurMask } from './mask'
 
 function handleBlur() {
@@ -96,13 +98,60 @@ function SettingButton() {
 
 function SearchButton() {
   const [visible, setVisible] = useState(false)
+  const [data, setData] = useState()
+  const [value, setValue] = useState<string>('')
+  const [isPending, startTransition] = useTransition()
+
+  const inputRef = useRef<HTMLInputElement>(null)
+
+  function handleSearch() {}
+
+  useEffect(() => {
+    if (visible) inputRef.current?.focus()
+  }, [visible])
+
   return (
     <>
       <Button aria-label="搜索" size="icon-lg" onClick={() => setVisible(!visible)}>
         <IconSearch />
       </Button>
       <BlurMask visible={visible}>
-        <div>搜索搜索搜索搜索搜索</div>
+        <div className="flex h-full w-full flex-col sm:max-w-4/5 md:max-w-2/3 lg:max-w-1/2">
+          <div className="glass mx-2 mt-20 flex flex-col p-2">
+            <InputGroup>
+              <InputGroupInput
+                ref={inputRef}
+                type="search"
+                placeholder="输入搜索内容"
+                className="text-sm"
+                value={value}
+                onChange={e => setValue(e.target.value)}
+              />
+              <InputGroupAddon>
+                <IconSearch />
+              </InputGroupAddon>
+              <InputGroupAddon align="inline-end">
+                <IconLoader2 className="animate-spin" />
+              </InputGroupAddon>
+            </InputGroup>
+          </div>
+          <div className="glass mx-2 mt-2 flex max-h-40 flex-col overflow-y-auto p-2">
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+            <p>126465</p>
+          </div>
+        </div>
       </BlurMask>
     </>
   )
