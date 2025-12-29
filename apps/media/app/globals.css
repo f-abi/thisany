@@ -175,7 +175,7 @@
   }
 
   .scroll-box {
-    scrollbar-color: var(--primary) transparent;
+    scrollbar-color: var(--border) transparent;
     scrollbar-width: thin;
   }
 }

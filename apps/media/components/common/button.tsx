@@ -99,66 +99,84 @@ function SettingButton() {
 
 function SearchButton() {
   const inputRef = useRef<HTMLInputElement>(null)
+  const latestKeyword = useRef<string>('')
+  const timerRef = useRef<NodeJS.Timeout | null>(null)
 
   const [visible, setVisible] = useState(false)
   const [data, setData] = useState<Array<VideoSearch>>([])
-  const [pageIndex, setPageIndex] = useState(1)
   const [keyword, setKeyword] = useState<string>('')
-  const [error, setError] = useState<boolean>(false)
   const [isPending, startTransition] = useTransition()
+  const [debouncing, setDebouncing] = useState(false)
 
   const listData = useMemo(() => data.flatMap(_ => _.items), [data])
 
   const hasMore = useMemo(
-    () => (data.length > 1 ? data[data.length - 1].pageTotal > pageIndex : false),
-    [data, pageIndex]
+    () => (data.length > 0 ? data[data.length - 1].pageTotal > data.length : false),
+    [data]
   )
 
-  const handleSearch = () => {
-    if (keyword.trim().length === 0) {
-      handleReset()
+  const handleSearch = (page: number, query: string) => {
+    if (query.trim().length === 0) {
+      setData([])
       return
-    } else
-      startTransition(async () => {
-        try {
-          setError(false)
-          const result = await searchVideo({
-            pageIndex,
-            keyword,
-            options: {
-              next: {
-                revalidate: 60000
-              }
+    }
+    startTransition(async () => {
+      try {
+        const result = await searchVideo({
+          pageIndex: page,
+          keyword: query,
+          options: {
+            next: {
+              revalidate: 60000
             }
-          })
-          setData([...data, result])
-        } catch {
-          toast.error('加载失败请重试')
-          setError(true)
-          setPageIndex(pageIndex === 1 ? pageIndex : pageIndex - 1)
+          }
+        })
+        if (query !== latestKeyword.current) return
+        if (page === 1) {
+          setData([result])
+        } else {
+          setData(prev => [...prev, result])
         }
-      })
+      } catch {
+        toast.error('加载失败请重试')
+      }
+    })
   }
 
   const handleLoadMore = () => {
-    setPageIndex(pageIndex + 1)
-    handleSearch()
-  }
-
-  const handleReset = () => {
-    setPageIndex(1)
-    setData([])
+    handleSearch(data.length + 1, keyword)
   }
 
   const handleChange = (event: ChangeEvent<HTMLInputElement>) => {
-    setKeyword(event.target.value)
-    handleReset()
-    handleSearch()
+    const val = event.target.value
+    setKeyword(val)
+    latestKeyword.current = val
+
+    setData([])
+    setDebouncing(true)
+
+    if (timerRef.current) clearTimeout(timerRef.current)
+
+    if (val.trim().length === 0) {
+      setDebouncing(false)
+      return
+    }
+
+    timerRef.current = setTimeout(() => {
+      setDebouncing(false)
+      handleSearch(1, val)
+    }, 500)
   }
 
   useEffect(() => {
     if (visible) inputRef.current?.focus()
   }, [visible])
+
+  useEffect(() => {
+    return () => {
+      if (timerRef.current) clearTimeout(timerRef.current)
+    }
+  }, [])
 
   return (
     <>
@@ -181,11 +199,11 @@ function SearchButton() {
                 <IconSearch />
               </InputGroupAddon>
               <InputGroupAddon align="inline-end">
-                {isPending && <IconLoader2 className="animate-spin" />}
+                {(isPending || debouncing) && <IconLoader2 className="animate-spin" />}
               </InputGroupAddon>
             </InputGroup>
           </div>
-          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto">
+          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto text-sm">
             {listData.map(item => (
               <Link
                 key={item.id}
@@ -196,12 +214,26 @@ function SearchButton() {
                 {item.title}
               </Link>
             ))}
-            {isPending && (
-              <div className="p-4">
-                <IconLoader2 className="animate-spin" />
+            {(isPending || debouncing) && (
+              <Button variant="ghost" className="m-2">
+                <IconLoader2 className="size-4.5 animate-spin" />
+              </Button>
+            )}
+            {!isPending && !debouncing && listData.length === 0 && keyword.trim().length > 0 && (
+              <div className="text-muted-foreground flex flex-col items-center justify-center py-10">
+                <IconSearch className="size-8 opacity-50" />
+                <p className="mt-2 text-sm">未找到相关结果</p>
               </div>
             )}
-            {!isPending && hasMore && <Button onClick={handleLoadMore}>加载更多</Button>}
+            {!isPending && !debouncing && hasMore && (
+              <Button
+                variant="ghost"
+                className="text-muted-foreground m-2 text-sm"
+                onClick={handleLoadMore}
+              >
+                加载更多
+              </Button>
+            )}
           </div>
         </div>
       </BlurMask>
