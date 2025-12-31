@@ -13,7 +13,7 @@ import {
   IconLoader2,
   IconSearch
 } from '@tabler/icons-react'
-import { searchVideo, VideoSearch, VideoSearchData, VideoType } from 'gying'
+import { searchVideo, VideoSearch, VideoType } from 'gying'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { ChangeEvent, useEffect, useMemo, useRef, useState, useTransition } from 'react'
@@ -26,6 +26,7 @@ import { AppTheme } from '@/types'
 
 import { SidebarItem } from '../layout/sidebar'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
+import { MediaImage } from './image'
 import { BlurMask } from './mask'
 
 function handleBlur() {
@@ -203,36 +204,69 @@ function SearchButton() {
               </InputGroupAddon>
             </InputGroup>
           </div>
-          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto text-sm">
+          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto pl-2 text-sm">
             {listData.map(item => (
               <Link
                 key={item.id}
                 href={`/media/${item.type}/${item.id}`}
                 onClick={() => setVisible(false)}
-                className="hover:bg-accent-foreground/10 m-1 rounded-lg p-2"
+                className="hover:bg-accent-foreground/10 mt-2 flex w-full rounded-lg p-2"
               >
-                {item.title}
+                <div className="lg:w-[10%]">
+                  <MediaImage image={item.image} title={item.title} />
+                </div>
+                <div className="text-muted-foreground flex flex-col justify-between lg:w-[90%] lg:pl-2">
+                  <div className="flex flex-col">
+                    <div className="lg:text-base">
+                      <span className="text-primary">{item.title}</span>
+                      <span className="pl-2">({item.year})</span>
+                    </div>
+                    <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                      {item.info}
+                    </div>
+                    {item.ename && (
+                      <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                        别名：{item.ename}
+                      </div>
+                    )}
+                    <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                      主演：{item.zhuyan}
+                    </div>
+                  </div>
+                  <div className="overflow-hidden text-ellipsis whitespace-nowrap">
+                    <div className="flex gap-2">
+                      {item.db > 0 && (
+                        <span className="text-chart-2">豆瓣 {item.db.toFixed(1)}</span>
+                      )}
+                      {item.im > 0 && (
+                        <span className="text-chart-4 dark:text-chart-3">
+                          IMDb {item.im.toFixed(1)}
+                        </span>
+                      )}
+                    </div>
+                  </div>
+                </div>
               </Link>
             ))}
-            {(isPending || debouncing) && (
-              <Button variant="ghost" className="m-2">
-                <IconLoader2 className="size-4.5 animate-spin" />
-              </Button>
-            )}
+
             {!isPending && !debouncing && listData.length === 0 && keyword.trim().length > 0 && (
               <div className="text-muted-foreground flex flex-col items-center justify-center py-10">
                 <IconSearch className="size-8 opacity-50" />
                 <p className="mt-2 text-sm">未找到相关结果</p>
               </div>
             )}
+            {(isPending || debouncing) && (
+              <div className="my-2 flex min-h-9 w-full items-center justify-center rounded-lg">
+                <IconLoader2 className="size-4.5 animate-spin" />
+              </div>
+            )}
             {!isPending && !debouncing && hasMore && (
-              <Button
-                variant="ghost"
-                className="text-muted-foreground m-2 text-sm"
+              <div
+                className="hover:bg-accent-foreground/10 my-2 flex min-h-9 w-full cursor-pointer items-center justify-center rounded-lg"
                 onClick={handleLoadMore}
               >
-                加载更多
-              </Button>
+                <span>加载更多</span>
+              </div>
             )}
           </div>
         </div>

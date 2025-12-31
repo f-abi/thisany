@@ -1,7 +1,7 @@
 'use client'
 
 import { IconLoader2, IconPhotoX } from '@tabler/icons-react'
-import { HomeBanner, ListItemData, VideoDetail } from 'gying'
+import { HomeBanner, ListItemData } from 'gying'
 import Image from 'next/image'
 import { PropsWithChildren, useState } from 'react'
 
@@ -29,7 +29,7 @@ function ImageSkeleton({ isLoading, isError }: { isLoading: boolean; isError: bo
   )
 }
 
-function MediaImage({ image, title }: VideoDetail) {
+function MediaImage({ image, title }: { image: string; title: string }) {
   const { loading, error, onLoad, onError } = useImageStatus()
   return (
     <div className="relative aspect-2/3">
