@@ -60,7 +60,7 @@ function CollectionButton() {
       <Button aria-label="分类" size="icon-lg" onClick={() => setVisible(!visible)}>
         {visible ? <IconCategory /> : <IconCategoryFilled />}
       </Button>
-      <BlurMask visible={visible}>
+      <BlurMask visible={visible} onClick={() => setVisible(false)}>
         <div className="h-full w-full">
           <div className="glass mx-2 mt-20 flex flex-col p-2">
             {APP_NAV_CONFIG.map(item => (
@@ -184,8 +184,11 @@ function SearchButton() {
       <Button aria-label="搜索" size="icon-lg" onClick={() => setVisible(!visible)}>
         <IconSearch />
       </Button>
-      <BlurMask visible={visible}>
-        <div className="flex h-full w-full flex-col sm:max-w-4/5 md:max-w-2/3 lg:max-w-1/2">
+      <BlurMask visible={visible} onClick={() => setVisible(false)}>
+        <div
+          className="flex h-full w-full flex-col sm:max-w-4/5 md:max-w-2/3 lg:max-w-1/2"
+          onClick={e => e.stopPropagation()}
+        >
           <div className="glass mx-2 mt-20 flex flex-col p-2">
             <InputGroup>
               <InputGroupInput
@@ -204,7 +207,7 @@ function SearchButton() {
               </InputGroupAddon>
             </InputGroup>
           </div>
-          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto pl-2 text-sm">
+          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto pl-2 text-sm [scrollbar-gutter:stable]">
             {listData.map(item => (
               <Link
                 key={item.id}
@@ -249,23 +252,30 @@ function SearchButton() {
               </Link>
             ))}
 
-            {!isPending && !debouncing && listData.length === 0 && keyword.trim().length > 0 && (
-              <div className="text-muted-foreground flex flex-col items-center justify-center py-10">
-                <IconSearch className="size-8 opacity-50" />
-                <p className="mt-2 text-sm">未找到相关结果</p>
-              </div>
-            )}
+            {!isPending &&
+              !debouncing &&
+              keyword.trim().length > 0 &&
+              (listData.length === 0 ? (
+                <div className="text-muted-foreground flex flex-col items-center justify-center py-10">
+                  <IconSearch className="size-8 opacity-50" />
+                  <p className="mt-2 text-sm">未找到相关结果</p>
+                </div>
+              ) : (
+                <div
+                  className={cn(
+                    'hover:bg-accent-foreground/10 my-2 flex min-h-9 w-full items-center justify-center rounded-lg select-none',
+                    hasMore && 'cursor-pointer'
+                  )}
+                  onClick={() => {
+                    if (hasMore) handleLoadMore()
+                  }}
+                >
+                  <span>{hasMore ? '加载更多' : '没有更多了'}</span>
+                </div>
+              ))}
             {(isPending || debouncing) && (
               <div className="my-2 flex min-h-9 w-full items-center justify-center rounded-lg">
                 <IconLoader2 className="size-4.5 animate-spin" />
-              </div>
-            )}
-            {!isPending && !debouncing && hasMore && (
-              <div
-                className="hover:bg-accent-foreground/10 my-2 flex min-h-9 w-full cursor-pointer items-center justify-center rounded-lg"
-                onClick={handleLoadMore}
-              >
-                <span>加载更多</span>
               </div>
             )}
           </div>
