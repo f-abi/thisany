@@ -3,10 +3,10 @@ import Link from 'next/link'
 
 import { HomeBannerLinkImage, MediaLinkImage } from './image'
 
-function MediaLink({ item }: { item: ListItemData }) {
+function MediaLink({ item, index }: { item: ListItemData; index?: number }) {
   return (
     <Link href={`/media/${item.dir}/${item.id}`} key={item.id} className="media-link">
-      <MediaLinkImage item={item} />
+      <MediaLinkImage item={item} loadingModel={index && index > 23 ? 'eager' : 'lazy'} />
       <div className="flex flex-col">
         <span className="media-link_title">{item.title}</span>
         <span className="media-link_tag">{tagToString(item.tag)}</span>

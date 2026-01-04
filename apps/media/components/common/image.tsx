@@ -48,7 +48,13 @@ function MediaImage({ image, title }: { image: string; title: string }) {
   )
 }
 
-function MediaLinkImage({ item }: { item: ListItemData }) {
+function MediaLinkImage({
+  item,
+  loadingModel
+}: {
+  item: ListItemData
+  loadingModel?: 'eager' | 'lazy' | undefined
+}) {
   const { loading, error, onLoad, onError } = useImageStatus()
   return (
     <div className="relative aspect-2/3">
@@ -69,6 +75,7 @@ function MediaLinkImage({ item }: { item: ListItemData }) {
         className="image"
         onLoad={onLoad}
         onError={onError}
+        loading={loadingModel}
       />
     </div>
   )

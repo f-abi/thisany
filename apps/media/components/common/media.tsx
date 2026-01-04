@@ -32,8 +32,8 @@ const baseDetailConfig: Array<{ key: keyof VideoDetail; name: string }> = [
 function MediaLinkList({ data }: { data: Array<ListItemData> }) {
   return (
     <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-4 lg:grid-cols-6">
-      {data.map(item => (
-        <MediaLink item={item} key={item.id} />
+      {data.map((item, index) => (
+        <MediaLink item={item} key={item.id} index={index} />
       ))}
     </div>
   )

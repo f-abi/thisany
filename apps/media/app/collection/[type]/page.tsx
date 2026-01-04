@@ -26,7 +26,7 @@ export default async function CollectionPage({
     ...urlSearchParams,
     options: {
       next: {
-        revalidate: 60
+        revalidate: 6000
       }
     }
   })
