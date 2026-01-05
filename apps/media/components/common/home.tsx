@@ -67,7 +67,7 @@ function HomeRecommend({ item }: { item: HomeRecommendType }) {
     <div id={item.type} className="card mx-2 mb-2 flex scroll-mt-20 flex-col p-2 sm:ml-0 xl:p-4">
       <div className="mb-1 flex flex-row items-center justify-between md:mb-2">
         <div className="text-lg font-black md:text-xl md:font-bold lg:text-2xl">{item.title}</div>
-        <Button onClick={handleRefresh} disabled={isPending} size="sm">
+        <Button onClick={handleRefresh} variant={'transparent'} disabled={isPending} size="sm">
           {isPending ? <IconLoader2 className="animate-spin" /> : <IconReload />}
           换一换
         </Button>

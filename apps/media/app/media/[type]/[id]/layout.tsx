@@ -11,7 +11,7 @@ export default async function Layout({
   params
 }: {
   children: React.ReactNode
-  params: Promise<{ type: VideoType; id: string }>
+  params: Promise<{ type: string; id: string }>
 }) {
   const { type, id } = await params
 
@@ -19,7 +19,7 @@ export default async function Layout({
 
   const resource = await getVideoResource({
     id,
-    type,
+    type: type as VideoType,
     options: {
       next: {
         revalidate: 60000
@@ -32,7 +32,7 @@ export default async function Layout({
       {children}
       {resource.playList.length > 0 && <OnlinePlayTabs playList={resource.playList} />}
       {resource.panList.length > 0 && <PanList panList={resource.panList} />}
-      <Footer />
+      <Footer className="sm:ml-2 2xl:mx-0" />
     </Main>
   )
 }

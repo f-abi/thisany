@@ -1,8 +1,10 @@
 import Link from 'next/link'
 
-export function Footer() {
+import { cn } from '@/lib/utils'
+
+export function Footer({ className }: { className?: string }) {
   return (
-    <footer className="card mx-2 mb-2 flex flex-col p-2 transition-all sm:ml-0 xl:p-4">
+    <footer className={cn('card mx-2 mb-2 flex flex-col p-2 sm:ml-0 xl:p-4', className)}>
       <Link className="text-sm md:text-base" href={'https://beian.miit.gov.cn/'}>
         闽ICP备2023007468号-1
       </Link>

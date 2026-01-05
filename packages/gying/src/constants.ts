@@ -12,7 +12,7 @@ export const IMAGE_FORMAT = '/384.webp&w=320&h=480&fit=cover'
 export const DB_URL = 'https://movie.douban.com/subject/'
 export const IM_URL = 'https://www.imdb.com/title/'
 export const RT_URL = 'https://www.rottentomatoes.com/'
-export const GYING_TYPE = ['mv', 'tv', 'ac'] as const
+export const GYING_TYPE = ['mv', 'tv', 'ac']
 export const GYING_TAG = [
   '美国',
   '大陆',

@@ -3,7 +3,7 @@ import Link from 'next/link'
 import { Fragment } from 'react/jsx-runtime'
 
 import { MediaImage } from '@/components/common/image'
-import { MediaLink } from '@/components/common/link'
+import { MediaLink, MediaLinkSkeleton } from '@/components/common/link'
 import { cn } from '@/lib/utils'
 
 const baseDetailConfig: Array<{ key: keyof VideoDetail; name: string }> = [
@@ -34,6 +34,16 @@ function MediaLinkList({ data }: { data: Array<ListItemData> }) {
     <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-4 lg:grid-cols-6">
       {data.map((item, index) => (
         <MediaLink item={item} key={item.id} index={index} />
+      ))}
+    </div>
+  )
+}
+
+function MediaLinkListSkeleton() {
+  return (
+    <div className="grid grid-cols-3 gap-1 md:grid-cols-4 md:gap-4 lg:grid-cols-6">
+      {Array.from({ length: 18 }).map((_, index) => (
+        <MediaLinkSkeleton key={index} />
       ))}
     </div>
   )
@@ -142,4 +152,4 @@ function MediaDetail({ data }: { data: VideoDetail }) {
   )
 }
 
-export { MediaDetail, MediaLinkList }
+export { MediaDetail, MediaLinkList, MediaLinkListSkeleton }

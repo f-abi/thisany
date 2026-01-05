@@ -7,13 +7,13 @@ import { SeasonTabs } from '@/components/common/tabs'
 export default async function MediaDetailPage({
   params
 }: {
-  params: Promise<{ type: VideoType; id: string }>
+  params: Promise<{ type: string; id: string }>
 }) {
   const { id, type } = await params
 
   const data = await getVideoDetail({
     id,
-    type,
+    type: type as VideoType,
     options: {
       next: {
         revalidate: 60000
@@ -25,7 +25,7 @@ export default async function MediaDetailPage({
     <>
       <MediaDetail data={data} />
 
-      {data.xle?.t && <SeasonTabs xle={data.xle} type={type} />}
+      {data.xle?.t && <SeasonTabs xle={data.xle} type={type as VideoType} />}
 
       {data.status && <MediaStatus html={data.status} />}
     </>

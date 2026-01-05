@@ -1,3 +1,5 @@
+import { MediaLinkListSkeleton } from '@/components/common/media'
+
 export default async function Loading() {
-  return <div>加载中</div>
+  return <MediaLinkListSkeleton />
 }

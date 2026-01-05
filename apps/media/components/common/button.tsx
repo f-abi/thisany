@@ -11,7 +11,8 @@ import {
   IconLayoutSidebarLeftCollapseFilled,
   IconLayoutSidebarLeftExpandFilled,
   IconLoader2,
-  IconSearch
+  IconSearch,
+  IconVideoOff
 } from '@tabler/icons-react'
 import { searchVideo, VideoSearch, VideoType } from 'gying'
 import Link from 'next/link'
@@ -25,6 +26,7 @@ import { cn } from '@/lib/utils'
 import { AppTheme } from '@/types'
 
 import { SidebarItem } from '../layout/sidebar'
+import { Empty, EmptyDescription, EmptyHeader, EmptyMedia, EmptyTitle } from '../ui/empty'
 import { InputGroup, InputGroupAddon, InputGroupInput } from '../ui/input-group'
 import { MediaImage } from './image'
 import { BlurMask } from './mask'
@@ -41,7 +43,12 @@ function HistoryButton() {
 
   return (
     <>
-      <Button aria-label="历史" size="icon-lg" onClick={() => setVisible(!visible)}>
+      <Button
+        aria-label="历史"
+        size="icon-lg"
+        variant={'transparent'}
+        onClick={() => setVisible(!visible)}
+      >
         {visible ? <IconClock /> : <IconClockFilled />}
       </Button>
       <BlurMask visible={visible}>
@@ -57,7 +64,12 @@ function CollectionButton() {
 
   return (
     <>
-      <Button aria-label="分类" size="icon-lg" onClick={() => setVisible(!visible)}>
+      <Button
+        aria-label="分类"
+        size="icon-lg"
+        variant={'transparent'}
+        onClick={() => setVisible(!visible)}
+      >
         {visible ? <IconCategory /> : <IconCategoryFilled />}
       </Button>
       <BlurMask visible={visible} onClick={() => setVisible(false)}>
@@ -88,7 +100,12 @@ function SettingButton() {
 
   return (
     <>
-      <Button aria-label="设置" size="icon-lg" onClick={() => setVisible(!visible)}>
+      <Button
+        aria-label="设置"
+        size="icon-lg"
+        variant={'transparent'}
+        onClick={() => setVisible(!visible)}
+      >
         <IconBackground />
       </Button>
       <BlurMask visible={visible}>
@@ -128,16 +145,13 @@ function SearchButton() {
           keyword: query,
           options: {
             next: {
-              revalidate: 60000
+              revalidate: 6000
             }
           }
         })
         if (query !== latestKeyword.current) return
-        if (page === 1) {
-          setData([result])
-        } else {
-          setData(prev => [...prev, result])
-        }
+        if (page === 1) setData([result])
+        else setData(prev => [...prev, result])
       } catch {
         toast.error('加载失败请重试')
       }
@@ -181,7 +195,12 @@ function SearchButton() {
 
   return (
     <>
-      <Button aria-label="搜索" size="icon-lg" onClick={() => setVisible(!visible)}>
+      <Button
+        aria-label="搜索"
+        variant={'transparent'}
+        size="icon-lg"
+        onClick={() => setVisible(!visible)}
+      >
         <IconSearch />
       </Button>
       <BlurMask visible={visible} onClick={() => setVisible(false)}>
@@ -256,10 +275,15 @@ function SearchButton() {
               !debouncing &&
               keyword.trim().length > 0 &&
               (listData.length === 0 ? (
-                <div className="text-muted-foreground flex flex-col items-center justify-center py-10">
-                  <IconSearch className="size-8 opacity-50" />
-                  <p className="mt-2 text-sm">未找到相关结果</p>
-                </div>
+                <Empty>
+                  <EmptyHeader>
+                    <EmptyMedia>
+                      <IconVideoOff className="size-8" />
+                    </EmptyMedia>
+                    <EmptyTitle>暂无影片数据</EmptyTitle>
+                    <EmptyDescription>未找到与 {keyword} 相关的影片</EmptyDescription>
+                  </EmptyHeader>
+                </Empty>
               ) : (
                 <div
                   className={cn(
@@ -300,7 +324,7 @@ function ThemeButton({ theme: init }: { theme: AppTheme }) {
   }
 
   return (
-    <Button aria-label="切换主题" onClick={toggleTheme} size="icon-lg">
+    <Button aria-label="切换主题" variant={'transparent'} onClick={toggleTheme} size="icon-lg">
       {theme === 'dark' ? <IconBrightness /> : <IconBrightnessFilled />}
     </Button>
   )

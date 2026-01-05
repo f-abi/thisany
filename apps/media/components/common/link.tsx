@@ -1,6 +1,7 @@
 import { HomeBanner, ListItemData, tagToString } from 'gying'
 import Link from 'next/link'
 
+import { Skeleton } from '../ui/skeleton'
 import { HomeBannerLinkImage, MediaLinkImage } from './image'
 
 function MediaLink({ item, index }: { item: ListItemData; index?: number }) {
@@ -12,6 +13,22 @@ function MediaLink({ item, index }: { item: ListItemData; index?: number }) {
         <span className="media-link_tag">{tagToString(item.tag)}</span>
       </div>
     </Link>
+  )
+}
+
+function MediaLinkSkeleton() {
+  return (
+    <div className="media-link">
+      <div className="relative aspect-2/3">
+        <div className="absolute inset-0 z-1 h-full w-full">
+          <Skeleton className="image-skeleton animate-pulse" />
+        </div>
+      </div>
+      <div className="flex flex-col">
+        <Skeleton className="my-1.5 h-4 animate-pulse md:h-5" />
+        <Skeleton className="h-3 animate-pulse md:h-3.5" />
+      </div>
+    </div>
   )
 }
 
@@ -34,4 +51,4 @@ function HomeBannerLink({ item }: { item: HomeBanner }) {
   )
 }
 
-export { HomeBannerLink, MediaLink }
+export { HomeBannerLink, MediaLink, MediaLinkSkeleton }

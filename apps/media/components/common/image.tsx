@@ -101,4 +101,4 @@ function HomeBannerLinkImage({ item, children }: PropsWithChildren<{ item: HomeB
   )
 }
 
-export { HomeBannerLinkImage, MediaImage, MediaLinkImage }
+export { HomeBannerLinkImage, ImageSkeleton, MediaImage, MediaLinkImage }

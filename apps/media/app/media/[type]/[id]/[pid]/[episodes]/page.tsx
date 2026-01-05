@@ -6,7 +6,7 @@ export default async function MediaDetailPage({
   params
 }: {
   params: Promise<{
-    type: VideoType
+    type: string
     id: string
     pid: string
     episodes: string
@@ -16,7 +16,7 @@ export default async function MediaDetailPage({
 
   const player = await getVideoPlayer({
     id,
-    type,
+    type: type as VideoType,
     pid,
     episodes,
     options: {
