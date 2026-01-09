@@ -1,0 +1,15 @@
+services:
+  media-app:
+    build:
+      context: .
+      dockerfile: scripts/deploy/media/Dockerfile
+    image: media-app:latest
+    container_name: media-app
+    ports:
+      - '3000:3000'
+    volumes:
+      - media_app_cache:/app/apps/media/.next/cache
+    restart: unless-stopped
+
+volumes:
+  media_app_cache:
