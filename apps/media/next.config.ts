@@ -18,7 +18,8 @@ const nextConfig: NextConfig = {
         hostname: 's.tutu.pm'
       }
     ]
-  }
+  },
+  output: 'standalone'
 }
 
 export default nextConfig
