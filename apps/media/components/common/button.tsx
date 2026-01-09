@@ -226,7 +226,7 @@ function SearchButton() {
               </InputGroupAddon>
             </InputGroup>
           </div>
-          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto pl-2 text-sm [scrollbar-gutter:stable]">
+          <div className="glass scroll-box mx-2 mt-2 flex max-h-[calc(100vh-20rem)] flex-col overflow-y-auto pl-1 text-sm [scrollbar-gutter:stable] md:pl-2">
             {listData.map(item => (
               <Link
                 key={item.id}
@@ -234,10 +234,10 @@ function SearchButton() {
                 onClick={() => setVisible(false)}
                 className="hover:bg-accent-foreground/10 mt-2 flex w-full rounded-lg p-2"
               >
-                <div className="lg:w-[10%]">
+                <div className="w-[30%] md:w-[25%] lg:w-[20%] xl:w-[15%] 2xl:w-[10%]">
                   <MediaImage image={item.image} title={item.title} />
                 </div>
-                <div className="text-muted-foreground flex flex-col justify-between lg:w-[90%] lg:pl-2">
+                <div className="text-muted-foreground flex w-[70%] flex-col justify-between pl-2 md:w-[75%] lg:w-[80%] xl:w-[85%] 2xl:w-[90%]">
                   <div className="flex flex-col">
                     <div className="lg:text-base">
                       <span className="text-primary">{item.title}</span>
