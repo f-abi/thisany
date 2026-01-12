@@ -27,7 +27,15 @@ export const metadata: Metadata = {
     template: '%s - ThisAny',
     absolute: 'ThisAny'
   },
-  description: '影视'
+  description: '影视',
+  robots: {
+    index: false,
+    follow: false,
+    googleBot: {
+      index: false,
+      follow: false
+    }
+  }
 }
 
 export default async function RootLayout({
