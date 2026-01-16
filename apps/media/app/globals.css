@@ -132,6 +132,9 @@
   html {
     @apply overflow-y-scroll;
   }
+  html.dark {
+    color-scheme: dark;
+  }
   body {
     @apply text-foreground bg-(--app-background);
   }

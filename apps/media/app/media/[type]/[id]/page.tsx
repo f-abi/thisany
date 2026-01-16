@@ -1,5 +1,6 @@
 import { getVideoDetail, VideoType } from 'gying'
 
+import { BrowsingHistoryLogger } from '@/components/common/history'
 import { MediaDetail } from '@/components/common/media'
 import { MediaStatus } from '@/components/common/status'
 import { SeasonTabs } from '@/components/common/tabs'
@@ -24,6 +25,8 @@ export default async function MediaDetailPage({
   return (
     <>
       <MediaDetail data={data} />
+
+      <BrowsingHistoryLogger data={data} />
 
       {data.xle?.t && <SeasonTabs xle={data.xle} type={type as VideoType} />}
 

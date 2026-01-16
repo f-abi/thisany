@@ -25,6 +25,8 @@
     "sonner": "catalog:",
     "tailwind-merge": "catalog:",
     "zustand": "catalog:",
+    "dayjs": "catalog:",
+    "idb": "catalog:",
     "xgplayer": "catalog:",
     "xgplayer-hls": "catalog:"
   },

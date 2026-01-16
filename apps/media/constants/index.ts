@@ -3,6 +3,11 @@ export enum COOKIE_NAME {
   SIDEBAR = 'sidebar'
 }
 
+export enum BROWSING_HISTORY_DB {
+  NAME = 'media-app',
+  STORE = 'browsing-history'
+}
+
 export const APP_NAV_CONFIG = [
   {
     type: 'mv',
