@@ -4,6 +4,9 @@
   "scripts": {
     "dev": "turbo run dev",
     "dev:media": "turbo run dev --filter=media",
+    "dev:m": "turbo run dev --filter=media",
+    "dev:website": "turbo run dev --filter=website",
+    "dev:w": "turbo run dev --filter=website",
     "build": "turbo run build",
     "lint": "turbo run lint",
     "test": "turbo run test",

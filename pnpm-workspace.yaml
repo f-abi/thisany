@@ -12,6 +12,12 @@ catalog:
   '@types/node': ^20
   '@types/react': ^19
   '@types/react-dom': ^19
+  '@nuxt/eslint': ^1
+  '@nuxt/image': ^2
+  '@nuxt/ui': ^4
+  vue: ^3
+  vue-router: ^4
+  nuxt: ^4
   class-variance-authority: ^0
   clsx: ^2
   czg: latest
