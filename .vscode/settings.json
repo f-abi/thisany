@@ -39,6 +39,9 @@
   "editor.autoClosingOvertype": "always",
   "editor.autoClosingQuotes": "beforeWhitespace",
   "editor.wordSeparators": "`~!@#%^&*()=+[{]}\\|;:'\",.<>/?",
+  "editor.quickSuggestions": {
+    "strings": "on"
+  },
 
   // terminal
   "terminal.integrated.fontFamily": "JetBrains Mono, Monaco, 'Courier New', monospace , MesloLGs NF",
@@ -58,6 +61,7 @@
   "files.insertFinalNewline": true,
   "files.simpleDialog.enable": true,
   "files.associations": {
+    "*.css": "tailwindcss",
     "*.ejs": "html",
     "*.art": "html",
     "**/tsconfig.json": "jsonc",
@@ -95,5 +99,9 @@
     "**/yarn.lock": true
   },
 
-  "tailwindCSS.experimental.classRegex": [["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"]]
+  "tailwindCSS.classAttributes": ["class", "ui"],
+  "tailwindCSS.experimental.classRegex": [
+    ["cva\\(([^)]*)\\)", "[\"'`]([^\"'`]*).*?[\"'`]"],
+    ["ui:\\s*{([^)]*)\\s*}", "(?:'|\"|`)([^']*)(?:'|\"|`)"]
+  ]
 }

@@ -17,6 +17,7 @@
     "nuxt": "catalog:",
     "typescript": "catalog:",
     "vue": "catalog:",
-    "vue-router": "catalog:"
+    "vue-router": "catalog:",
+    "tailwindcss": "catalog:"
   }
 }
