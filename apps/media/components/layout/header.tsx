@@ -19,6 +19,7 @@ export function Header({ theme }: Props) {
         <div className="relative flex h-full w-full items-center justify-between md:max-w-7xl">
           <div className="flex gap-2 sm:hidden">
             <CollectionButton />
+            <div className="flex size-10 sm:hidden"></div>
           </div>
           <div className="flex flex-row items-center">
             <Logo />
