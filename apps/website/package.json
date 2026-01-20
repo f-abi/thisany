@@ -19,6 +19,7 @@
     "typescript": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:",
-    "tailwindcss": "catalog:"
+    "tailwindcss": "catalog:",
+    "shared": "workspace:*"
   }
 }

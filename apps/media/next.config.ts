@@ -7,7 +7,7 @@ const nextConfig: NextConfig = {
       hmrRefreshes: true
     }
   },
-  transpilePackages: ['gying'],
+  transpilePackages: ['gying', 'shared'],
   images: {
     minimumCacheTTL: 31536000,
     remotePatterns: [

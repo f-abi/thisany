@@ -1,8 +1,8 @@
 'use server'
 
 import { cookies } from 'next/headers'
+import { COOKIE_NAME } from 'shared'
 
-import { COOKIE_NAME } from '@/constants'
 import { AppTheme } from '@/types'
 
 export const getTheme = async () => {

@@ -16,9 +16,10 @@ import { VideoType } from 'gying'
 import Link from 'next/link'
 import { useParams } from 'next/navigation'
 import { useEffect, useState } from 'react'
+import { COOKIE_NAME } from 'shared'
 
 import { Button } from '@/components/ui/button'
-import { APP_NAV_CONFIG, COOKIE_NAME } from '@/constants'
+import { APP_NAV_CONFIG } from '@/constants'
 import { cn } from '@/lib/utils'
 import { AppTheme } from '@/types'
 

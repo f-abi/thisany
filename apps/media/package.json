@@ -16,6 +16,7 @@
     "embla-carousel-autoplay": "catalog:",
     "embla-carousel-react": "catalog:",
     "gying": "workspace:*",
+    "shared": "workspace:*",
     "lucide-react": "catalog:",
     "motion": "catalog:",
     "next": "catalog:",

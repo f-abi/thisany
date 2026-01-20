@@ -1,8 +1,3 @@
-export enum COOKIE_NAME {
-  THEME = 'theme',
-  SIDEBAR = 'sidebar'
-}
-
 export enum BROWSING_HISTORY_DB {
   NAME = 'media-app',
   STORE = 'browsing-history'

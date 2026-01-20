@@ -1,5 +1,6 @@
 // https://nuxt.com/docs/api/configuration/nuxt-config
 import { defaultLocale, locales } from './i18n/constant'
+import { COOKIE_NAME } from 'shared'
 export default defineNuxtConfig({
   compatibilityDate: '2025-07-15',
   devtools: { enabled: true },
@@ -10,13 +11,13 @@ export default defineNuxtConfig({
     defaultLocale,
     strategy: 'no_prefix',
     detectBrowserLanguage: {
-      cookieKey: 'i18n'
+      cookieKey: COOKIE_NAME.I18N
     }
   },
   colorMode: {
     preference: 'dark',
     fallback: 'dark',
     storage: 'cookie',
-    storageKey: 'theme'
+    storageKey: COOKIE_NAME.THEME
   }
 })
