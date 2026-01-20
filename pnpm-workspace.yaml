@@ -12,6 +12,7 @@ catalog:
   '@types/node': ^20
   '@types/react': ^19
   '@types/react-dom': ^19
+  '@nuxtjs/i18n': ^10
   '@nuxt/eslint': ^1
   '@nuxt/image': ^2
   '@nuxt/ui': ^4

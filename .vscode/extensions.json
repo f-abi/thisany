@@ -15,18 +15,20 @@
     "dsznajder.es7-react-js-snippets",
     // --- Tailwind CSS ---
     "bradlc.vscode-tailwindcss",
-    // --- 标签管理 ---
+    // 国际化
+    "lokalise.i18n-ally",
+    // 标签管理
     "formulahendry.auto-rename-tag",
     "formulahendry.auto-close-tag",
-    // --- ts错误提示 ---
+    // ts错误提示
     "yoavbls.pretty-ts-errors",
-    // --- 错误横线 ---
+    // 错误横线
     "usernamehw.errorlens",
-    // --- 注释翻译 ---
+    // 注释翻译
     "intellsmi.comment-translate",
-    // --- Catalog 版本 ---
+    // Catalog 版本
     "antfu.pnpm-catalog-lens",
-    // --- 主题图标 ---
+    // 主题图标
     "pkief.material-icon-theme"
   ],
 

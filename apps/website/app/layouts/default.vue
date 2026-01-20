@@ -1,30 +1,23 @@
 <script setup lang="ts">
 import type { NavigationMenuItem } from '@nuxt/ui'
+import { locales } from '~~/i18n/constant'
+
+const { locale, setLocale } = useI18n()
 
 const route = useRoute()
 
-const items = computed<NavigationMenuItem[]>(() => [
+const items: NavigationMenuItem[] = [
   {
-    label: 'Docs',
-    to: '/docs/getting-started',
-    active: route.path.startsWith('/docs/getting-started')
-  },
-  {
-    label: 'Components',
-    to: '/docs/components',
-    active: route.path.startsWith('/docs/components')
-  },
-  {
-    label: 'Figma',
-    to: 'https://go.nuxt.com/figma-ui',
+    label: 'Video',
+    to: 'https://www.thisany.com',
     target: '_blank'
   },
   {
-    label: 'Releases',
-    to: 'https://github.com/nuxt/ui/releases',
+    label: 'Jenkins',
+    to: 'https://s.thisany.com',
     target: '_blank'
   }
-])
+]
 </script>
 
 <template>
@@ -34,6 +27,12 @@ const items = computed<NavigationMenuItem[]>(() => [
     </template>
     <UNavigationMenu :items="items" />
     <template #right>
+      <ULocaleSelect
+        :model-value="locale"
+        :locales="locales"
+        @update:model-value="locale => setLocale(locale as 'zh-CN' | 'en')"
+        variant="ghost"
+      />
       <UColorModeButton />
     </template>
   </UHeader>

@@ -1,5 +1,13 @@
+<script setup lang="ts">
+import { locales } from '~~/i18n/constant'
+const { locale } = useI18n()
+const lang = computed(() => {
+  return locales.find(l => l.code === locale.value)
+})
+</script>
+
 <template>
-  <UApp>
+  <UApp :locale="lang">
     <NuxtLoadingIndicator
       color="repeating-linear-gradient(to right,#8eabff 0%,#618dff 50%,#0052d9 100%)"
     />
