@@ -119,5 +119,9 @@
   "i18n-ally.localeCountryMap": {
     "en": "en",
     "zh-CN": "zh-CN"
-  }
+  },
+
+  // eslint
+  "eslint.useFlatConfig": true,
+  "eslint.workingDirectories": [{ "mode": "auto" }]
 }

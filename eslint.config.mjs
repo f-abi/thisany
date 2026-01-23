@@ -1,3 +1,5 @@
+import prettier from 'eslint-config-prettier'
+
 export default [
   {
     ignores: [
@@ -14,5 +16,6 @@ export default [
       'turbo.json',
       'pnpm-lock.yaml'
     ]
-  }
+  },
+  prettier
 ]

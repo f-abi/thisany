@@ -1,14 +1,18 @@
-import { zh_cn, en } from '@nuxt/ui/locale'
+import type { LocaleObject } from '@nuxtjs/i18n'
 
-export const locales = [
+export const locales: LocaleObject<string>[] = [
   {
-    ...zh_cn,
-    file: `${zh_cn.code}.json`
+    file: 'zh-CN.json',
+    name: '简体中文',
+    code: 'zh-CN',
+    dir: 'ltr'
   },
   {
-    ...en,
-    file: `${en.code}.json`
+    file: 'en.json',
+    name: 'English',
+    code: 'en',
+    dir: 'ltr'
   }
 ]
 
-export const defaultLocale = zh_cn.code
+export const defaultLocale = 'en'

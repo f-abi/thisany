@@ -1,9 +1,8 @@
-<script lang="ts" setup>
-const { t } = useI18n()
-</script>
+<script lang="ts" setup></script>
 
 <template>
-  <div>
-    <div class="text-red-500" v-for="i in 100" :key="i">{{ t('hello') }}</div>
+  <div class="flex h-full items-center justify-center gap-4">
+    <button class="cursor-target rounded-2xl bg-amber-300 p-4">Click me!</button>
+    <div class="cursor-target bg-amber-300 p-4">Hover target</div>
   </div>
 </template>

@@ -12,10 +12,11 @@ catalog:
   '@types/node': ^20
   '@types/react': ^19
   '@types/react-dom': ^19
-  '@nuxtjs/i18n': ^10
   '@nuxt/eslint': ^1
   '@nuxt/image': ^2
-  '@nuxt/ui': ^4
+  '@nuxtjs/i18n': ^10
+  '@nuxtjs/color-mode': ^4
+  '@tailwindcss/vite': ^4
   vue: ^3
   vue-router: ^4
   nuxt: ^4
@@ -33,6 +34,8 @@ catalog:
   lint-staged: latest
   lucide-react: latest
   motion: latest
+  motion-v: latest
+  gsap: latest
   next: ^16
   prettier: latest
   prettier-plugin-tailwindcss: latest

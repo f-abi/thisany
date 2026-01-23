@@ -19,6 +19,7 @@
     "ename",
     "ffqg",
     "GHWTPF",
+    "gsap",
     "GYING",
     "inlist",
     "kbds",
@@ -28,9 +29,11 @@
     "nextjs",
     "nuxt",
     "nuxtjs",
+    "oklch",
     "partialize",
     "PHPSESSID",
     "Prefixs",
+    "rgba",
     "rrange",
     "Rsfs",
     "Sbgnq",
@@ -39,6 +42,7 @@
     "stime",
     "tabler",
     "tname",
+    "Tweens",
     "vite",
     "weserv",
     "xgplayer",
@@ -46,14 +50,14 @@
     "zustand"
   ],
   "ignorePaths": [
+    "*.yaml",
     "**/node_modules/**",
     "**/dist/**",
     "**/*-dist/**",
-    "**/icons/**",
-    "pnpm-lock.yaml",
     "**/*.log",
     "**/*.test.ts",
     "**/*.spec.ts",
-    "**/__tests__/**"
+    "**/__tests__/**",
+    "**/__test__/**"
   ]
 }

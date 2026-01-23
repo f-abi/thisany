@@ -7,19 +7,24 @@
     "dev": "nuxt dev",
     "generate": "nuxt generate",
     "preview": "nuxt preview",
-    "postinstall": "nuxt prepare"
+    "postinstall": "nuxt prepare",
+    "lint": "eslint --fix"
   },
   "dependencies": {
     "@nuxtjs/i18n": "catalog:",
+    "@nuxtjs/color-mode": "catalog:",
     "@nuxt/eslint": "catalog:",
     "@nuxt/image": "catalog:",
-    "@nuxt/ui": "catalog:",
     "eslint": "catalog:",
     "nuxt": "catalog:",
     "typescript": "catalog:",
     "vue": "catalog:",
     "vue-router": "catalog:",
+    "motion-v": "catalog:",
+    "gsap": "catalog:",
     "tailwindcss": "catalog:",
+    "tw-animate-css": "catalog:",
+    "@tailwindcss/vite": "catalog:",
     "shared": "workspace:*"
   }
 }
