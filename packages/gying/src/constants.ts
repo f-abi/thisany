@@ -1,7 +1,7 @@
-export const GYING_API = 'https://www.gyg.si'
-export const BT_AUTH = '351akCD55NvYLXJpuGFg5GgXKr447ex9GotZtY8RXW5_fAUIS2-qcmClRFOpfxwKQY_0'
+export const GYING_API = 'https://www.xn--wcv59z.com/'
+export const BT_AUTH = 'f986zR-Z3GyGOfgIvaiA-3y64rAc9h5UsC7Bhs1nN5bMLhQr_XpO2GofR7GUIJzhYJV2'
 export const BT_COOKIETIME = '3d0eu56MjV1PI9pKH4qWi96lN5C4YPfyjwB90mOXlzk2O990yXMS'
-export const PHPSESSID = '9adgipcvompeidfrsctv4akn1k'
+export const PHPSESSID = 'mom7mke9r6i0r7fvqke383rsto'
 export const USER_AGENT =
   'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
 // export const BASE_COOKIE = `BT_auth=${BT_AUTH};BT_cookietime=${BT_COOKIETIME};PHPSESSID=${PHPSESSID}`
