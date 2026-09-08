@@ -346,7 +346,7 @@ export async function getVideoPlayer({
 }): Promise<Player> {
   const cookie = await getCookies()
 
-  const response = await fetch(`${GYING_API}/py/${pid}_${episodes}.html`, {
+  const response = await fetch(`${GYING_API}/py/${pid}/${episodes}`, {
     ...options,
     headers: {
       'User-Agent': USER_AGENT,
@@ -357,6 +357,8 @@ export async function getVideoPlayer({
   })
 
   const dataRaw = await response.text()
+
+  console.log(dataRaw)
 
   // 提取HTML文本中的 _obj.player
   const detailsMatch = dataRaw.match(/_obj\.player\s*=\s*(\{.*?\});/s)

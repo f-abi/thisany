@@ -1,11 +1,8 @@
 export const GYING_API = 'https://www.xn--wcv59z.com/'
-export const BT_AUTH = 'f986zR-Z3GyGOfgIvaiA-3y64rAc9h5UsC7Bhs1nN5bMLhQr_XpO2GofR7GUIJzhYJV2'
-export const BT_COOKIETIME = '3d0eu56MjV1PI9pKH4qWi96lN5C4YPfyjwB90mOXlzk2O990yXMS'
-export const PHPSESSID = 'mom7mke9r6i0r7fvqke383rsto'
+export const BT_AUTH = '2cfaLCyVNJkDr4IvYAhCNM340jZ8VzmEMyKRdxBv9wEU4xPeVQiRPx1CuOhvwmAIsh5u'
 export const USER_AGENT =
-  'Mozilla/5.0 (iPhone; CPU iPhone OS 16_6 like Mac OS X) AppleWebKit/605.1.15 (KHTML, like Gecko) Version/16.6 Mobile/15E148 Safari/604.1'
-// export const BASE_COOKIE = `BT_auth=${BT_AUTH};BT_cookietime=${BT_COOKIETIME};PHPSESSID=${PHPSESSID}`
-export const BASE_COOKIE = `PHPSESSID=${PHPSESSID};app_auth=${BT_AUTH};`
+  'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/152.0.0.0 Safari/537.36'
+export const BASE_COOKIE = `app_auth=${BT_AUTH};`
 export const IMAGE_CDN = 'https://s.tutu.pm'
 export const IMAGE_SERVICE = 'https://images.weserv.nl/?url='
 export const IMAGE_FORMAT = '/384.webp&w=320&h=480&fit=cover'
